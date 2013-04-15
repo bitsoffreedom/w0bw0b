@@ -1,33 +1,16 @@
-<h2>Hoofdstuk 1</h2>
-<p>
- Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum in lacus
-mauris. Vivamus id tortor non libero mollis condimentum cursus et quam. Nunc
-augue quam, tempus eget commodo at, hendrerit vitae diam. Donec quis laoreet
-eros. Sed lacinia elementum lorem, quis ultrices erat fringilla at. Nullam vitae
-lacus elit. Phasellus at orci a sapien pellentesque congue at sit amet urna.
-Mauris dolor est, vulputate id tempus eu, pharetra volutpat felis. Vestibulum
-elementum lobortis libero, nec scelerisque diam convallis vitae. Curabitur eget
-turpis ut arcu vulputate vulputate. Curabitur neque erat, fringilla sed pretium
-suscipit, fermentum vitae enim. Aenean eu nisi nulla. Nam tincidunt, sapien at
-rutrum tempor, est orci scelerisque diam, et fermentum eros diam a orci. Duis a
-mauris nisl, quis mollis felis. Vestibulum in tincidunt orci.
-</p>
-<h2>Hoofdstuk 1</h2>
-<p>
-Fusce eu imperdiet leo. Pellentesque sollicitudin purus et elit accumsan in
-porta est imperdiet. Maecenas blandit lacinia orci blandit lacinia. Mauris
-tempus condimentum leo eu pulvinar. Morbi porttitor, quam eu blandit semper,
-lectus ante suscipit quam, non viverra sem urna in est. Aliquam dictum interdum
-nisl, eu dignissim nisl varius congue. Aenean ut sollicitudin nulla. Praesent
-sollicitudin arcu et eros accumsan commodo sed sit amet tellus. Mauris at justo
-ligula. Sed facilisis adipiscing nisl vitae venenatis. Quisque vel quam in magna
-pretium mattis.
-</p>
-<h2>Hoofdstuk 1</h2>
-<p>
-Cras dui quam, ultrices id pharetra at, porta at elit. Vestibulum rhoncus dolor
-euismod magna tempus ornare. Morbi lorem odio, interdum et porttitor non, tempus
-in nisi. Sed tincidunt faucibus ultrices. Sed vel metus nulla. Pellentesque
-habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-Mauris vitae nibh metus. 
-</p>
+<h2>Automatisch berekende velden</h2>
+
+<h3>Actie in</h3>
+<p>Het &quot;actie in&quot; veld geeft aan over hoeveel dagen weer iets moet of staat te gebeuren. Het kan bijvoorbeeld zijn dat de termijn voor het nemen van een beslissing door het bestuursorgaan afloopt, of dat bezwaar moet zijn aangetekend.</p>
+<p>Als er nog geen beslissing op het verzoek- of bezwaarschrift is genomen, geldt de datum waarop de termijn voor het nemen van een beslissing verloopt als datum waarop actie ondernomen moet worden. Als er wel een beslissing is genomen, geldt de deadline voor het aantekenen van respectievelijk het bezwaar of beroep als datum waarop actie ondernomen (had) moeten worden.</p>
+<p>Als het bestuursorgaan in gebreke is gesteld voor het niet nemen van een beslissing, dan wordt de berekening daarop gebaseerd. Gemakshalve wordt er vanuit gegaan dat de gebruiker niet eerder beroep voor het niet nemen van een beslissing aantekent, dan na het verstrijken van de maximale termijn waarover het bestuursorgaan een dwangsom is verschuldigd naar aanleiding van de ingebrekestelling. Volgens de wet gaat die dwangsom pas lopen op &quot;de dag waarop twee weken zijn verstreken na de dag waarop [...] het bestuursorgaan van de aanvrager een schriftelijke ingebrekestelling heeft ontvangen&quot; en is het aantal dwangsomdagen niet meer dan 42 dagen. De &quot;actie in&quot; wordt berekend op basis van de ontvangstdatum van de ingebrekestelling, vermeerderd met 1 dag (&quot;de dag na de dag waarop&quot;) + 14 dagen (&quot;twee weken&quot;) + 42 dagen (&quot;ten hoogste 42 dagen&quot;). Als de ontvangstdatum niet bekend is, wordt de verzenddatum gebruikt, vermeerderd met nog een extra dag.</p>
+<p>Als bij de rechtbank beroep is aangetekend, dan is er geen &quot;actie in&quot; datum. De afhandeling, en dus ook het moment van de volgende stap, is dan volledig afhankelijk van de rechtbank en slecht te voorspellen.</p>
+
+<h3>Aantal dwangsom dagen</h3>
+<p>Het &quot;aantal dagen dwangsom&quot; veld geeft aan over hoeveel dagen het bestuursorgaan, nadat het in gebreke is gesteld voor het niet nemen van een beslissing, al een dwangsom is verschuldigd.</p>
+<p>De wet stelt een paar voorwaarden: er zijn 14 dagen verstreken na het verlopen van de termijn voor het nemen van de beslissing &eacute;n er zijn 14 dagen verstreken na de ontvangstdatum van de ingebrekestelling.<p>
+<p>Bijvoorbeeld, stel dat de dag van ontvangst van de ingebrekestelling 19 juni 2012 is. Dan is de dag na de ontvangst dus de 20 juni 2012. De dag waarop daarna twee weken zijn verstreken is 4 juli 2012. Dat is de dag waarop het bestuursorgaan voor het eerst een dwangsom is verschuldigd. Op 2 augustus heeft het bestuursorgaan dan eindelijk een beslissing genomen. Dan is de laatste dag waarop het bestuursorgaan in gebreke was dus 1 augustus. Het totaal aantal dwangsom dagen is daarmee dus 29.</p>
+<p>Voor het berekenen van het veld wordt in de eerste plaats gekeken naar de datum van de dag waarop het bestuursorgaan de ingebrekestelling heeft ontvangen. Als er al een beslissing op het verzoek is genomen, wordt de datum van de dagtekening van die beslissing als einddatum gebruikt. Als er nog geen beslissing is genomen, dan wordt daarvoor de huidige datum gebruikt. Het verschil tussen die twee data, verminderd met 15 dagen en met een maximum van 42 dagen is het &quot;aantal dagen dwangsom&quot;.</p>
+
+<h3>Berekende dwangsom</h3>
+<p>De dwangsom bedraagt op basis van de berekende dagen: de eerste veertien dagen € 20 per dag, de daaropvolgende veertien dagen € 30 per dag en de overige dagen € 40 per dag. Het totaal aantal dagen is maximaal 42 dagen. Het totaal bedrag kan dus maximaal 1.260 euro zijn.</p>
