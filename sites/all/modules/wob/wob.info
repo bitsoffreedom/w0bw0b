@@ -1,0 +1,5 @@
+name = WOB
+description = Computed fields code for WOB
+core = 7.x
+dependencies[] = computed_field
+package = WOB

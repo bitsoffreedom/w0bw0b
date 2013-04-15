@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the WOB instellingen feature.
+ */
+
+include_once 'wob_instellingen.features.inc';

@@ -1,0 +1,542 @@
+<?php
+
+function wob_menu() {
+	return array(
+		'documentatie' => array(
+			'title' => 'Documentatie',
+			'page callback' => 'wob_documentation_page',
+			'access arguments' => array('access content'),
+			'type' => MENU_NORMAL_ITEM,
+			'weight' => 1,
+			'menu_name' => 'user-menu',
+		),
+	);
+}
+
+function wob_documentation_page() {
+	return theme('wob_documentation');
+}
+
+function wob_theme() {
+	return array(
+		'wob_documentation' => array(
+			'template' => 'wob_documentation',
+		),
+	);
+}
+
+function calculated_field_field_request_addendum_days_javascript() {
+	return '
+		if ($("#edit-field-request-addendum-signed input").val()) {
+			var date = $("#edit-field-request-addendum-signed input").datepicker("getDate");
+			var enddate;
+
+			if ($("#edit-field-request-add-answer-receive input").val()) {
+				enddate = $("#edit-field-request-add-answer-receive input").datepicker("getDate");
+			} else if ($("#edit-field-request-add-answer-sent input").val()) {
+				enddate = $("#edit-field-request-add-answer-sent input").datepicker("getDate");
+				enddate.setDate(enddate.getDate() + 1);
+			} else {
+				enddate = $("#edit-field-request-addendum-deadline input").datepicker("getDate");
+			}
+
+			if (enddate) {
+				$("#edit-field-request-addendum-days input").val(date.getDaysDifference(enddate));
+			}
+		}
+	';
+}
+
+function calculated_field_field_request_penalty_days_int_javascript() {
+	return '
+		(function() {
+			$("#edit-field-request-penalty-days-int input").val("");
+			if ($("#edit-field-request-notice-received input").val()) {
+				var notice_received = $("#edit-field-request-notice-received input").datepicker("getDate");
+
+				var request_decision = new Date();
+				if ($("#edit-field-request-decision input").val()) {
+					request_decision = $("#edit-field-request-decision input").datepicker("getDate");
+				}
+
+				var days = notice_received.getDaysDifference(request_decision);
+				if (days > 15) {
+					$("#edit-field-request-penalty-days-int input").val(Math.min(42, days - 15));
+				}
+			}
+		})();
+	';
+}
+
+function computed_field_field_request_penalty_days_calc_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+	$entity_field[0]['value'] = 0;//NULL;
+
+	$wrapper = entity_metadata_wrapper($entity_type, $entity);
+	if ($notice_received = $wrapper->field_request_notice_received->value()) {
+		$notice_received = new DateObject($notice_received, NULL, 'U');
+
+		$request_decision = new DateObject();
+		if ($request_decision_input = $wrapper->field_request_decision->value()) {
+			$request_decision = new DateObject($request_decision_input, NULL, 'U');
+		}
+
+		$days = $notice_received->difference($request_decision, 'days', FALSE);
+		if ($days > 15) {
+			$entity_field[0]['value'] = min(42, $days - 15);
+		}
+	}
+}
+
+function calculated_field_field_request_forfeited_penalty_javascript() {
+	return '
+		var days = parseInt($("#edit-field-request-penalty-days-int input").val());
+			if (days > 0) {
+			var days_term_28 = 0;
+			if (days > 28)
+				days_term_28 = days - 28;
+			var days_term_14 = 0;
+			if (days > 14)
+				days_term_14 = (days - days_term_28) - 14;
+			var days_term_0 = (days - days_term_28 - days_term_14);
+			var amount = 20 * days_term_0 + 30 * days_term_14 + 40 * days_term_28;
+			$("#edit-field-request-forfeited-penalty input").val(amount);
+		}
+	';
+}
+
+function calculated_field_field_objection_deadline_date_javascript() {
+	return '
+		if (deadline = $("#edit-field-request-decision input").datepicker("getDate")) {
+			deadline.setDate(deadline.getDate()+42);
+			$("#edit-field-objection-deadline-date input").datepicker("setDate", deadline);
+		}
+	';
+}
+
+function calculated_field_field_request_decision_deadline2_javascript() {
+	return '
+		if ($("#edit-field-request-date-sent input").val()) {
+			var date = $("#edit-field-request-date-sent input").datepicker("getDate");
+			if ($("#edit-field-request-date-received input").val()) {
+				date = $("#edit-field-request-date-received input").datepicker("getDate");
+			} else {
+				date.setDate(date.getDate() + 1);
+			}
+
+			var law = $("#edit-field-law select").val();
+			switch (law) {
+				case "1":
+					date.setDate(date.getDate() + 28);
+					var suspension = parseInt($("#edit-field-request-suspension input").val());
+					if (suspension > 0) {
+						date.setDate(date.getDate() + suspension);
+					}
+
+					var leniency = parseInt($("#edit-field-request-leniency input").val());
+					if (leniency > 0) {
+						date.setDate(date.getDate() + leniency);
+					}
+					break;
+				default:
+					date.setDate(date.getDate() + 90);
+					break;
+			}
+
+			if ($("#edit-field-request-addendum-days input").val()) {
+				date.setDate(date.getDate() + parseInt($("#edit-field-request-addendum-days input").val()));
+			}
+
+			if ($("#edit-field-request-adjourned input").is(":checked")) {
+				date.setDate(date.getDate() + 28);
+			}
+
+			$("#edit-field-request-decision-deadline2 input").datepicker("setDate", date);
+		}
+	';
+}
+
+// Use this field for displaying while editing
+function calculated_field_field_request_days_left_int_javascript() {
+	return '
+		var decision = new Date();
+		if ($("#edit-field-request-decision input").val()) {
+			var decision = $("#edit-field-request-decision input").datepicker("getDate");
+		}
+
+		var deadline = $("#edit-field-request-decision-deadline2 input").datepicker("getDate");
+		if (deadline)
+			$("#edit-field-request-days-left-int input").val(decision.getDaysDifference(deadline));
+	';
+}
+
+// Use this field to actuallty compute the correct value
+// Due to the fact this field is dependent on today's date, we can not use
+// the JavaScript version (does not get recomputed)
+function computed_field_field_request_days_left_calc_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+	$entity_field[0]['value'] = NULL;
+
+	$wrapper = entity_metadata_wrapper($entity_type, $entity);
+
+	$decision = new DateObject();
+	if ($decision_value = $wrapper->field_request_decision->value()) {
+		$decision = new DateObject($decision_value, NULL, 'U');
+	}
+
+	if ($deadline_value = $wrapper->field_request_decision_deadline2->value()) {
+		$deadline = new DateObject($deadline_value, NULL, 'U');
+		$entity_field[0]['value'] = $decision->difference($deadline, 'days', FALSE);
+	}
+}
+
+function calculated_field_field_object_ommission_days_javascript() {
+	return '
+		if ($("#edit-field-objection-addendum input").is(":checked")) {
+			var date = $("#edit-field-objection-date-addendum input").datepicker("getDate");
+			date.setDate(date.getDate() + 1);
+			var received = $("#edit-field-objection-add-answer-recei input").datepicker("getDate");
+			var deadline = $("#edit-field-objection-add-deadline input").datepicker("getDate");
+			var enddate;
+
+			if ($("#edit-field-objection-add-answer-sent input").val()) {
+				var sent = $("#edit-field-objection-add-answer-sent input").datepicker("getDate");
+
+				if ($("#edit-field-objection-add-answer-recei input").val()) {
+					if (received.getTime() > deadline.getTime()) {
+						enddate = deadline;
+					} else {
+						enddate = received;
+					}
+				} else {
+					sent.setDate(sent.getDate() + 1);
+					if (sent.getTime() > deadline.getTime()) {
+						enddate = deadline;
+					} else {
+						enddate = sent;
+					}
+				}
+			} else {
+				enddate = deadline;
+			}
+
+			console.log("days", date.getDaysDifference(enddate));
+			$("#edit-field-object-ommission-days input").val(date.getDaysDifference(enddate));
+		}
+	';
+}
+
+function calculated_field_field_objection_adjourned_javascript() {
+	return '
+		if ($("#edit-field-objection input").is(":checked")) {
+		  $("#edit-field-objection-adjourned-und input[value=\'0\']").attr("checked", "checked");
+		} else {
+		  $("#edit-field-objection-adjourned-und input[value=\'1\']").attr("checked", "checked");
+		}
+	';
+}
+
+function calculated_field_field_objection_deadline_2_javascript() {
+	return '
+		if ($("#edit-field-objection input").is(":checked")) {
+			var date = $("#edit-field-objection-deadline-date input").datepicker("getDate");
+			if (date) {
+				date.setDate(date.getDate() + 42);
+
+				var ommission = parseInt($("#edit-field-object-ommission-days input").val());
+				if (ommission > 0)
+					date.setDate(date.getDate() + ommission);
+
+				if ($("#edit-field-objection-commission input:first").is(":checked"))
+					date.setDate(date.getDate() + 42);
+
+				if ($("#edit-field-objection-adjourned input:first").is(":checked"))
+					date.setDate(date.getDate() + 42);
+					
+				var coulance = parseInt($("#edit-field-objection-coulance input").val());
+				if (coulance > 0)
+					date.setDate(date.getDate() + coulance);
+					
+				$("#edit-field-objection-deadline-2 input").datepicker("setDate", date);
+			}
+		} else {
+			$("#edit-field-objection-deadline-2 input").val("");
+		}
+	';
+}
+
+function calculated_field_field_objection_remaining_days_javascript() {
+	return '
+		if ($("#edit-field-objection input").is(":checked")) {
+			var date = new Date();
+			if ($("#edit-field-objection-decision-date input").val()) {
+				date = $("#edit-field-objection-decision-date input").datepicker("getDate");
+			}
+
+			if ($("#edit-field-objection-deadline-2 input").val()) {
+				var decision = $("#edit-field-objection-deadline-2 input").datepicker("getDate");
+				if (decision)
+					$("#edit-field-objection-remaining-days input").val(date.getDaysDifference(decision));
+			}
+		}
+	';
+}
+
+function calculated_field_field_appeal_deadline_javascript() {
+	return '
+		if ($("#edit-field-objection-decision-date input").val()) {
+			var date = $("#edit-field-objection-decision-date input").datepicker("getDate");
+			if (date) {
+				date.setDate(date.getDate() + 43);
+				$("#edit-field-appeal-deadline input").datepicker("setDate", date);
+			}
+		}
+	';
+}
+
+function calculated_field_field_action_required_date_javascript() {
+	return '
+		$("#edit-field-action-required-date input").val("");
+		if ($("#edit-field-status select").val() == "open") {
+			var date = false;
+			if ($("#edit-field-request-decision input").val().length == 0) {
+				if (!$("#edit-field-request-notice-received input").val().length == 0) {
+					date = $("#edit-field-request-notice-received input").datepicker("getDate");
+					date.setDate(date.getDate() + 57); // 1 + 14 + 42 days
+				} else if (!$("#edit-field-request-notice-sent input").val().length == 0) {
+					date = $("#edit-field-request-notice-sent input").datepicker("getDate");
+					date.setDate(date.getDate() + 58);
+				} else {
+					date = $("#edit-field-request-decision-deadline2 input").datepicker("getDate");
+				}
+			} else {
+				if (!$("#edit-field-objection input").is(":checked")) {
+					date = $("#edit-field-objection-deadline-date input").datepicker("getDate");
+					date.setDate(date.getDate() - 7);
+				} else {
+					if ($("#edit-field-objection-decision-date input").val().length == 0) {
+					if (!$("#edit-field-objection-notice-received input").val().length == 0) {
+						date = $("#edit-field-objection-notice-received input").datepicker("getDate");
+						date.setDate(date.getDate() + 57); // 1 + 14 + 42 days
+					} else if (!$("#edit-field-objection-notice-sent-date input").val().length == 0) {
+						date = $("#edit-field-objection-notice-sent-date input").datepicker("getDate");
+						date.setDate(date.getDate() + 58); // 1 + 14 + 42 + 1 days
+					} else {
+						date = $("#edit-field-objection-deadline-2 input").datepicker("getDate");
+					}
+					} else {
+					if (!$("#edit-field-appeal-sent input").is(":checked")) {
+						date = $("#edit-field-appeal-deadline input").datepicker("getDate");
+						date.setDate(date.getDate() - 7);
+					}
+					}
+				}
+			}
+			if (date)
+			$("#edit-field-action-required-date input").datepicker("setDate", date);
+		}
+	';
+}
+
+function calculated_field_field_current_phase_javascript() {
+	return '
+		if ($("#edit-field-appeal-sent input").is(":checked")) {
+			$("#edit-field-current-phase select").val("beroep");
+		} else if ($("#edit-field-objection input").is(":checked")) {
+			$("#edit-field-current-phase select").val("bezwaar");
+		} else {
+			$("#edit-field-current-phase select").val("verzoek");
+		}
+	';
+}
+
+function calculated_field_field_status_javascript() {
+	return '
+		var today = new Date();
+		if ($("#edit-field-ending-reason textarea").val()) {
+			$("#edit-field-status select").val("afgerond");
+		} else if ($("#edit-field-current-phase select").val() == "beroep") {
+			if ($("#edit-field-appeal-completed input").val()) {
+				$("#edit-field-status select").val("afgerond");
+			} else {
+				$("#edit-field-status select").val("open");
+			}
+		} else if ($("#edit-field-current-phase select").val() == "bezwaar") {
+			if ($("#edit-field-objection-decision-date input").val()) {
+				$("#edit-field-status select").val("afgerond");
+			} else {
+				var deadline = $("#edit-field-appeal-deadline input").datepicker("getDate");
+				if (deadline && deadline.getTime() > today.getTime()) {
+					$("#edit-field-status select").val("afgerond");
+				} else {
+					$("#edit-field-status select").val("open");
+				}
+			}
+		} else {
+			if ($("#edit-field-request-decision input").val()) {
+				var deadline = $("#edit-field-objection-deadline-date input").datepicker("getDate");
+				if (deadline && deadline.getTime() > today.getTime()) {
+					$("#edit-field-status select").val("open");
+				} else {
+					$("#edit-field-status select").val("afgerond");
+				}
+			} else {
+				$("#edit-field-status select").val("open");
+			}
+		}
+	';
+}
+
+function calculated_field_field_stats_request_duration_javascript() {
+	return '
+		if ($("#edit-field-request-date-sent input")) {
+			var date = $("#edit-field-request-date-sent input").datepicker("getDate");
+			date.setDate(date.getDate() + 1);
+
+			var enddate = new Date();
+			if ($("#edit-field-request-decision-received input")) {
+				enddate = $("#edit-field-request-decision-received input").datepicker("getDate");
+			}
+			$("#edit-field-stats-request-duration input").val(date.getDaysDifference(enddate));
+		}
+	';
+}
+
+function calculated_field_field_stats_objection_duration_javascript() {
+	return '
+		if ($("#edit-field-objection input:first").is(":checked")) {
+			if ($("#edit-field-objection-date-sent input").val()) {
+				var date = $("#edit-field-objection-date-sent input").datepicker("getDate");
+				date.setDate(date.getDate() + 1);
+
+				var enddate = new Date();
+				if ($("#edit-field-objection-decision-date input").val()) {
+					enddate = $("#edit-field-objection-decision-date input").datepicker("getDate");
+				}
+				$("#edit-field-stats-objection-duration input").val(date.getDaysDifference(enddate));
+			}
+		}
+	';
+}
+
+function calculated_field_field_stats_appeal_duration_javascript() {
+	return '
+		if ($("#edit-field-appeal-sent input:first").is(":checked")) {
+			if ($("#edit-field-appeal-received-date input").val()) {
+				var date = $("#edit-field-appeal-received-date input").datepicker("getDate");
+				date.setDate(date.getDate() + 1);
+
+				var enddate = new Date();
+				if ($("#edit-field-appeal-completed input").val()) {
+					enddate = $("#edit-field-appeal-completed input").datepicker("getDate");
+				}
+				$("#edit-field-stats-objection-duration input").val(date.getDaysDifference(enddate));
+			}
+		}
+	';
+}
+
+function calculated_field_field_appeal_request_duration_javascript() {
+	return '
+		var date;
+		$("#edit-field-appeal-request-duration input").val("");
+
+		if ($("#edit-field-request-date-received input").val()) {
+			date = $("#edit-field-request-date-received input").datepicker("getDate");
+		} else if ($("#edit-field-request-date-sent input").val()) {
+			date = $("#edit-field-request-date-sent input").datepicker("getDate");
+			date.setDate(date.getDate() + 1);
+		} else if ($("#edit-field-request-date-signed input").val()) {
+			date = $("#edit-field-request-date-signed input").datepicker("getDate");
+			date.setDate(date.getDate() + 1);
+		}
+
+		if (date) {
+			var enddate = new Date();
+			if ($("#edit-field-status select").val() != "open") {
+				if ($("#edit-field-appeal-judgement input").val()) {
+					enddate = $("#edit-field-appeal-judgement input").datepicker("getDate");
+				} else if ($("#edit-field-objection-decision-receive input").val()) {
+					enddate = $("#edit-field-objection-decision-receive input").datepicker("getDate");
+				} else if ($("#edit-field-objection-decision-date input").val()) {
+					enddate = $("#edit-field-objection-decision-date input").datepicker("getDate");
+				} else if ($("#edit-field-request-decision-received input").val()) {
+					enddate = $("#edit-field-request-decision-received input").datepicker("getDate");
+				} else if ($("#edit-field-request-decision-received input").val()) {
+					enddate = $("#edit-field-request-decision input").datepicker("getDate");
+				}
+			}
+			$("#edit-field-appeal-request-duration input").val(date.getDaysDifference(enddate));
+		}
+	';
+}
+
+function calculated_field_field_stats_penalty_calculated_javascript() {
+	return '
+		var request_penalty = parseInt($("#edit-field-request-forfeited-penalty input").val()) || 0;
+		var objection_penalty = parseInt($("#edit-field-objection-forfeitedpenalty input").val()) || 0;
+
+		$("#edit-field-stats-penalty-calculated input").val(request_penalty + objection_penalty);
+	';
+}
+
+function calculated_field_field_stats_penalty_received_javascript() {
+	return '
+		var request_penalty = parseInt($("#edit-field-request-penalty-paid input").val()) || 0;
+		var objection_penalty = parseInt($("#edit-field-objection-penalty-paid input").val()) || 0;
+
+		$("#edit-field-stats-penalty-received input").val(request_penalty + objection_penalty);
+	';
+}
+
+// Process some fieldgroups to toggle visibility (not supported in conditional fields mofule yet)
+function wob_field_group_build_pre_render_alter(&$element) {
+	$element['group_right']['group_tabs']['group_request']['group_request_addendum']['#states'] = array(
+		'visible' => array(
+			'#edit-field-request-addendum input' => array('checked' => TRUE),
+		),
+	);
+	$element['group_right']['group_tabs']['group_request']['group_request_adjourned']['#states'] = array(
+		'visible' => array(
+			'#edit-field-request-adjourned input' => array('checked' => TRUE),
+		),
+	);
+	$element['group_right']['group_tabs']['group_request']['group_request_notice']['#states'] = array(
+		'visible' => array(
+			'#edit-field-request-notice-of-default input' => array('checked' => TRUE),
+		),
+	);
+	$element['group_right']['group_tabs']['group_request']['group_request_appeal']['#states'] = array(
+		'visible' => array(
+			'#edit-field-request-appeal input' => array('checked' => TRUE),
+		),
+	);
+	$element['group_right']['group_tabs']['group_objection']['group_objection_wrapper']['#states'] = array(
+		'visible' => array(
+			'#edit-field-objection input' => array('checked' => TRUE),
+		),
+	);
+	$element['group_right']['group_tabs']['group_objection']['group_objection_addendum']['#states'] = array(
+		'visible' => array(
+			'#edit-field-objection-addendum input' => array('checked' => TRUE),
+		),
+	);
+	$element['group_right']['group_tabs']['group_objection']['group_objection_adjourned']['#states'] = array(
+		'visible' => array(
+			'#edit-field-objection-adjourned input' => array('checked' => TRUE),
+		),
+	);
+	$element['group_right']['group_tabs']['group_objection']['group_objection_notice']['#states'] = array(
+		'visible' => array(
+			'#edit-field-objection-notice-default input' => array('checked' => TRUE),
+		),
+	);
+	$element['group_right']['group_tabs']['group_objection']['group_objection_appeal']['#states'] = array(
+		'visible' => array(
+			'#edit-field-objection-appeal input' => array('checked' => TRUE),
+		),
+	);
+	$element['group_right']['group_tabs']['group_appeal']['group_appeal_wrapper']['#states'] = array(
+		'visible' => array(
+			'#edit-field-appeal-sent input' => array('checked' => TRUE),
+		),
+	);
+}

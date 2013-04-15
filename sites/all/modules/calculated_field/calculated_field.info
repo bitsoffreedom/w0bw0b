@@ -1,0 +1,4 @@
+name = Calculated Field
+description = Adds JavaScript calculation options to fields
+core = 7.x
+package = Fields

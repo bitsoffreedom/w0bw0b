@@ -1,0 +1,39 @@
+/**
+ * Font face files
+ *
+ */
+
+@font-face {
+	font-family: ff-din-web-pro-1;
+	src: url("DINWebPro-Black.eot"); /*/live*/
+}
+/* For the rest */
+@font-face {
+    font-family: ff-din-web-pro-1;
+    src: url("DINWebPro-Black.woff") format("woff");
+	font-weight: bold;
+}
+
+/* For IE < 9 */
+@font-face {
+	font-family: ff-din-web-regular;
+	src: url("DINWeb.eot");
+}
+
+/* then for WOFF-capable browsers */
+@font-face {
+	font-family: ff-din-web-regular;
+	src: url("DINWeb.woff") format("woff");
+}
+
+/* For IE < 9 */
+@font-face {
+	font-family: ff-din-web-bold;
+	src: url("DINWeb-Bold.eot");
+}
+
+/* then for WOFF-capable browsers */
+@font-face {
+	font-family: ff-din-web-bold;
+	src: url("DINWeb-Bold.woff") format("woff");
+}

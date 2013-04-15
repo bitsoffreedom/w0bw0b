@@ -1,0 +1,117 @@
+<?php
+
+/** 
+  Process each form to add the JavaScript code and submission function to handle submission
+  In case of field forms, attach a JavaScript settings block to each field
+ */
+function calculated_field_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'field_ui_field_edit_form') {
+
+    $function = 'calculated_field_' . $form['#field']['field_name'] . '_javascript';
+    if (function_exists($function)) {
+      $form['field']['settings']['javascript'] = array(
+        '#markup' => t('This javascript setting is being populated with function <strong>!field()</strong>', array('!field' => $function)),
+      );
+    } else {
+      $form['field']['settings']['javascript'] = array(
+       '#type' => 'textarea',
+       '#title' => t('Javascript settings'),
+       '#default_value' => isset($form['#field']['settings']['javascript']) ? $form['#field']['settings']['javascript'] : '',
+       '#description' => t('Alternatively, implement <strong>!function()</strong>', array('!function' => $function)),
+     );
+    }
+  }
+
+  $form['#attached']['js'][] = drupal_get_path('module', 'calculated_field') . '/js/calculated_field.js';
+  $form['#attributes']['onsubmit'] = "jQuery('select.disabled-by-calculated-field').removeAttr('disabled');";
+  $form['#submit'][] = 'calculated_field_process_submission';
+}
+
+function calculated_field_field_widget_form_alter(&$element, &$form_state, $context) {
+  $js = NULL;
+
+  if (!isset($context['field']['field_name'])) {
+    return;
+  }
+
+  $function = 'calculated_field_' . $context['field']['field_name'] . '_javascript';
+  if (function_exists($function)) {
+    $js = $function();
+  } else {
+      if (isset($context['field']['settings']['javascript'])) {
+          $js = $context['field']['settings']['javascript'];
+      }
+  }
+
+  // Only if we attached JavaScript
+  if ($js) {
+      $item = array(
+        '#type' => 'checkbox',
+        '#title' => t('Calculate field'),
+        '#attributes' => array(
+          'id' => $context['field']['field_name'] . '_locked',
+          'name' => $context['field']['field_name'] . '_locked',
+        ),
+      );
+
+      // Edited: Disable locking (not used)
+      //if (!isset($context['field']['settings']['locked']) || $context['field']['settings']['locked']) {
+        $item['#attributes']['checked'] = 'checked';
+      //}
+
+      // Some items are nested
+      $form_element = &$element;
+      if (isset($element['value'])) {
+        $form_element = &$element['value'];
+      }
+
+      $form_element['#suffix'] = '<div class="element-invisible">' . render($item) . '</div>';
+
+      // In case of specific fields we need to do some extra processing
+      $form_element['#attributes']['readonly'] = 'readonly';
+      switch ($form_element['#type']) {
+        case 'date_combo':
+          $element['#after_build'][] = 'calculated_field_date_combo_after_build';
+          break;
+        case 'select':
+          $form_element['#attributes']['class'][] = 'disabled-by-calculated-field';
+          $form_element['#attributes']['disabled'] = 'disabled';
+          break;
+      }
+
+      // Inject JavaScript code in settings for this field
+      drupal_add_js(array(
+        'calculated_field' => array(
+          $context['field']['field_name'] => $js,
+        ),
+      ), 'setting');
+  }
+}
+
+// The actual HTML input elements are nested
+function calculated_field_date_combo_after_build($element, &$form_state) {
+  $element['value']['#attributes']['readonly'] = 'readonly';
+  $element['value']['date']['#attributes']['readonly'] = 'readonly';
+  return $element;
+}
+
+/**
+  Save the settings in the field settings
+ */
+function calculated_field_process_submission($form, &$form_state) {
+  foreach (array_keys($form_state['input']) as $field_name) {
+    if ($field = field_read_field($field_name)) {
+      if (isset($field['settings']['javascript'])) {
+        $locked = FALSE;
+        if (!empty($form_state['input'][$field_name . '_locked']))
+          $locked = TRUE;
+
+        if (!isset($field['settings']['locked']) || $field['settings']['locked'] != $locked) {
+            $new_field = array('field_name' => $field_name);
+            $new_field['settings']['locked'] = $locked;
+            field_update_field($new_field);
+        }
+      }
+    }
+  }
+}

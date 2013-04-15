@@ -1,0 +1,8 @@
+name = WOB theme
+description = Theme for Bits of Freedom's WOB tool
+version = VERSION
+core = 7.x
+base theme = cssgrid
+
+stylesheets[all][] = css/fonts.css
+stylesheets[all][] = css/wob_theme.css
