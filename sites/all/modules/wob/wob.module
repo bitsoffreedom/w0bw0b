@@ -169,7 +169,7 @@ function calculated_field_field_request_days_left_int_javascript() {
 	';
 }
 
-// Use this field to actuallty compute the correct value
+// Use this field to actually compute the correct value
 // Due to the fact this field is dependent on today's date, we can not use
 // the JavaScript version (does not get recomputed)
 function computed_field_field_request_days_left_calc_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
@@ -487,7 +487,7 @@ function calculated_field_field_stats_penalty_received_javascript() {
 	';
 }
 
-// Process some fieldgroups to toggle visibility (not supported in conditional fields mofule yet)
+// Process some fieldgroups to toggle visibility (not supported in conditional fields module yet)
 function wob_field_group_build_pre_render_alter(&$element) {
 	$element['group_right']['group_tabs']['group_request']['group_request_addendum']['#states'] = array(
 		'visible' => array(
