@@ -1079,11 +1079,11 @@ function wob_instellingen_field_group_info() {
     'weight' => '6',
     'children' => array(
       0 => 'field_appeal_request_duration',
-      1 => 'field_stats_request_duration',
-      2 => 'field_stats_appeal_duration',
-      3 => 'field_stats_objection_duration',
-      4 => 'field_stats_penalty_calculated',
-      5 => 'field_stats_penalty_received',
+      1 => 'field_stats_appeal_duration',
+      2 => 'field_stats_objection_duration',
+      3 => 'field_stats_penalty_calculated',
+      4 => 'field_stats_penalty_received',
+      5 => 'field_stats_request_duration',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
