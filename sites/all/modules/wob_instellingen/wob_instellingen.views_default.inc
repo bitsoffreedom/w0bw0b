@@ -112,7 +112,7 @@ function wob_instellingen_views_default_views() {
       'empty_column' => 0,
     ),
   );
-  /* Veld: Inhoud: Pad */
+  /* Field: Content: Path */
   $handler->display->display_options['fields']['path']['id'] = 'path';
   $handler->display->display_options['fields']['path']['table'] = 'node';
   $handler->display->display_options['fields']['path']['field'] = 'path';
@@ -120,13 +120,13 @@ function wob_instellingen_views_default_views() {
   $handler->display->display_options['fields']['path']['exclude'] = TRUE;
   $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['path']['absolute'] = TRUE;
-  /* Veld: Inhoud: Kenmerk */
+  /* Field: Content: Kenmerk */
   $handler->display->display_options['fields']['field_request_id']['id'] = 'field_request_id';
   $handler->display->display_options['fields']['field_request_id']['table'] = 'field_data_field_request_id';
   $handler->display->display_options['fields']['field_request_id']['field'] = 'field_request_id';
   $handler->display->display_options['fields']['field_request_id']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_request_id']['alter']['path'] = '[path]';
-  /* Veld: Inhoud: Actie in */
+  /* Field: Content: Actie in */
   $handler->display->display_options['fields']['field_action_required_date']['id'] = 'field_action_required_date';
   $handler->display->display_options['fields']['field_action_required_date']['table'] = 'field_data_field_action_required_date';
   $handler->display->display_options['fields']['field_action_required_date']['field'] = 'field_action_required_date';
@@ -135,27 +135,27 @@ function wob_instellingen_views_default_views() {
     'interval' => '1',
     'interval_display' => 'raw time hence',
   );
-  /* Veld: Inhoud: Titel */
+  /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'Beleid';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Veld: Inhoud: Organisatie */
+  /* Field: Content: Organisatie */
   $handler->display->display_options['fields']['field_organisation_term']['id'] = 'field_organisation_term';
   $handler->display->display_options['fields']['field_organisation_term']['table'] = 'field_data_field_organisation_term';
   $handler->display->display_options['fields']['field_organisation_term']['field'] = 'field_organisation_term';
   $handler->display->display_options['fields']['field_organisation_term']['type'] = 'taxonomy_term_reference_link';
-  /* Veld: Inhoud: Fase */
+  /* Field: Content: Fase */
   $handler->display->display_options['fields']['field_current_phase']['id'] = 'field_current_phase';
   $handler->display->display_options['fields']['field_current_phase']['table'] = 'field_data_field_current_phase';
   $handler->display->display_options['fields']['field_current_phase']['field'] = 'field_current_phase';
-  /* Veld: Inhoud: Status */
+  /* Field: Content: Status */
   $handler->display->display_options['fields']['field_status']['id'] = 'field_status';
   $handler->display->display_options['fields']['field_status']['table'] = 'field_data_field_status';
   $handler->display->display_options['fields']['field_status']['field'] = 'field_status';
-  /* Veld: Inhoud: Duur alle fasen */
+  /* Field: Content: Duur alle fasen */
   $handler->display->display_options['fields']['field_appeal_request_duration']['id'] = 'field_appeal_request_duration';
   $handler->display->display_options['fields']['field_appeal_request_duration']['table'] = 'field_data_field_appeal_request_duration';
   $handler->display->display_options['fields']['field_appeal_request_duration']['field'] = 'field_appeal_request_duration';
@@ -165,25 +165,25 @@ function wob_instellingen_views_default_views() {
     'thousand_separator' => ' ',
     'prefix_suffix' => 1,
   );
-  /* Sorteercriterium: Inhoud: Actie in (field_action_required_date) */
+  /* Sort criterion: Content: Actie in (field_action_required_date) */
   $handler->display->display_options['sorts']['field_action_required_date_value']['id'] = 'field_action_required_date_value';
   $handler->display->display_options['sorts']['field_action_required_date_value']['table'] = 'field_data_field_action_required_date';
   $handler->display->display_options['sorts']['field_action_required_date_value']['field'] = 'field_action_required_date_value';
-  /* Filtercriterium: Inhoud: Gepubliceerd */
+  /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
   $handler->display->display_options['filters']['status']['table'] = 'node';
   $handler->display->display_options['filters']['status']['field'] = 'status';
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-  /* Filtercriterium: Inhoud: Type */
+  /* Filter criterion: Content: Type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'wob' => 'wob',
   );
-  /* Filtercriterium: Inhoud: Status (field_status) */
+  /* Filter criterion: Content: Status (field_status) */
   $handler->display->display_options['filters']['field_status_value']['id'] = 'field_status_value';
   $handler->display->display_options['filters']['field_status_value']['table'] = 'field_data_field_status';
   $handler->display->display_options['filters']['field_status_value']['field'] = 'field_status_value';
@@ -203,7 +203,7 @@ function wob_instellingen_views_default_views() {
     4 => 0,
     3 => 0,
   );
-  /* Filtercriterium: Inhoud: Organisatie (field_organisation_term) */
+  /* Filter criterion: Content: Organisatie (field_organisation_term) */
   $handler->display->display_options['filters']['field_organisation_term_tid']['id'] = 'field_organisation_term_tid';
   $handler->display->display_options['filters']['field_organisation_term_tid']['table'] = 'field_data_field_organisation_term';
   $handler->display->display_options['filters']['field_organisation_term_tid']['field'] = 'field_organisation_term_tid';
@@ -220,7 +220,7 @@ function wob_instellingen_views_default_views() {
   );
   $handler->display->display_options['filters']['field_organisation_term_tid']['type'] = 'select';
   $handler->display->display_options['filters']['field_organisation_term_tid']['vocabulary'] = 'organisation';
-  /* Filtercriterium: Inhoud: Fase (field_current_phase) */
+  /* Filter criterion: Content: Fase (field_current_phase) */
   $handler->display->display_options['filters']['field_current_phase_value']['id'] = 'field_current_phase_value';
   $handler->display->display_options['filters']['field_current_phase_value']['table'] = 'field_data_field_current_phase';
   $handler->display->display_options['filters']['field_current_phase_value']['field'] = 'field_current_phase_value';
@@ -263,6 +263,7 @@ function wob_instellingen_views_default_views() {
     t('Status'),
     t('Looptijd'),
     t('Page'),
+    t('more'),
   );
   $export['wob_overview'] = $view;
 

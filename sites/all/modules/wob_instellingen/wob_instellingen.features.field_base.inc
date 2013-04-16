@@ -235,6 +235,25 @@ function wob_instellingen_field_default_field_bases() {
     'type' => 'datetime',
   );
 
+  // Exported field_base: 'field_appeal_duration'
+  $field_bases['field_appeal_duration'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_appeal_duration',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'number',
+    'settings' => array(
+      'javascript' => '',
+      'locked' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'number_integer',
+  );
+
   // Exported field_base: 'field_appeal_judgement'
   $field_bases['field_appeal_judgement'] = array(
     'active' => 1,
