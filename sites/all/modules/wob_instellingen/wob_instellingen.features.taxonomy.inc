@@ -9,7 +9,7 @@
  */
 function wob_instellingen_taxonomy_default_vocabularies() {
   return array(
-    'laws' => (object) array(
+    'laws' => array(
       'name' => 'Wetsvormen',
       'machine_name' => 'laws',
       'description' => '',
@@ -34,7 +34,7 @@ function wob_instellingen_taxonomy_default_vocabularies() {
         ),
       ),
     ),
-    'organisation' => (object) array(
+    'organisation' => array(
       'name' => 'Organisatie',
       'machine_name' => 'organisation',
       'description' => 'De organisatie waar de WOB betrekking op heeft',
@@ -59,7 +59,7 @@ function wob_instellingen_taxonomy_default_vocabularies() {
         ),
       ),
     ),
-    'rechtbank' => (object) array(
+    'rechtbank' => array(
       'name' => 'Rechtbank',
       'machine_name' => 'rechtbank',
       'description' => '',
