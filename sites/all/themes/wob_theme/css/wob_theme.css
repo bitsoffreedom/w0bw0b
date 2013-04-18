@@ -111,8 +111,9 @@ ul.secondary {
 #header, #footer {
 	background-color: #58A618;
 }
-#header .section {
-	padding: 5px 20px;
+#header .section .row {
+	padding-top: 5px;
+	padding-bottom: 5px;
 	position: relative;
 }
 #name-and-slogan {
@@ -129,6 +130,7 @@ ul.secondary {
 }
 #page-wrapper {
 	min-height: 100%;
+	position: relative;
 }
 #page {
 	padding-bottom: 40px;
@@ -138,6 +140,9 @@ ul.secondary {
 	margin-top: -40px;
 	color: white;
 	text-align: right;
+	position: absolute;
+	width: 100%;
+	bottom: 0;
 }
 #footer a {
 	color: white;

@@ -480,6 +480,46 @@ function wob_instellingen_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-wob-field_appeal_duration'
+  $field_instances['node-wob-field_appeal_duration'] = array(
+    'bundle' => 'wob',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 5,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_appeal_duration',
+    'label' => 'Duur fase bezwaar',
+    'required' => 0,
+    'settings' => array(
+      'max' => '',
+      'min' => '',
+      'prefix' => '',
+      'suffix' => ' dag| dagen',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'number',
+      'settings' => array(),
+      'type' => 'number',
+      'weight' => 47,
+    ),
+  );
+
   // Exported field_instance: 'node-wob-field_appeal_judgement'
   $field_instances['node-wob-field_appeal_judgement'] = array(
     'bundle' => 'wob',
@@ -4041,7 +4081,7 @@ function wob_instellingen_field_default_field_instances() {
         'module' => 'custom_formatters',
         'settings' => array(),
         'type' => 'custom_formatters_amount_of_days_left_computed_int_',
-        'weight' => 39,
+        'weight' => 38,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4077,7 +4117,7 @@ function wob_instellingen_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4123,7 +4163,7 @@ function wob_instellingen_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 40,
+        'weight' => 39,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4282,7 +4322,7 @@ function wob_instellingen_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 42,
+        'weight' => 40,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4699,15 +4739,9 @@ function wob_instellingen_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_integer',
-        'weight' => 4,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4836,7 +4870,7 @@ function wob_instellingen_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -4883,7 +4917,7 @@ function wob_instellingen_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -4930,7 +4964,7 @@ function wob_instellingen_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -4977,7 +5011,7 @@ function wob_instellingen_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',
@@ -5024,7 +5058,7 @@ function wob_instellingen_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'number',
         'settings' => array(
           'decimal_separator' => '.',

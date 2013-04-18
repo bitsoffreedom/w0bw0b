@@ -1,3 +1,4 @@
+	<div id="page-wrapper">
 	<div id="header"><div class="section container clearfix"><div class="row">
 
 		<?php if ($site_name || $site_slogan): ?>
@@ -25,7 +26,7 @@
 		<?php print render($primary_local_tasks); ?>
 	</div></div></div> <!-- /.section, /#header -->
 
-	<div id="page-wrapper"><div id="page" class="">
+	<div id="page" class="">
 
 		<?php if ($main_menu || $secondary_menu): ?>
 			<div id="navigation"><div class="section row">
@@ -66,10 +67,9 @@
 
 		</div></div></div> <!-- /#main, /#main-wrapper -->
 
-	</div></div> <!-- /#page, /#page-wrapper -->
+	</div> <!-- /#page -->
 
 	<div id="footer"><div class="section container clearfix"><div class="row">
 		<?php print render($page['footer']); ?>
 	</div></div></div> <!-- /.section, /#footer -->
-
-
+	</div> <!-- /#page-wrapper -->
