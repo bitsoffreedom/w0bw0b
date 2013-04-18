@@ -162,7 +162,7 @@ $realm_variables = array();
       'display' => array(),
     ),
   ),
-  'file_temporary_path' => '/var/www/virtual/uncinc.nl/phptmp/',
+  'file_temporary_path' => '/tmp/',
   'filter_fallback_format' => 'plain_text',
   'i18n_node_extended_page' => 1,
   'i18n_node_extended_wob' => 1,
