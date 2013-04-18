@@ -4081,7 +4081,7 @@ function wob_instellingen_field_default_field_instances() {
         'module' => 'custom_formatters',
         'settings' => array(),
         'type' => 'custom_formatters_amount_of_days_left_computed_int_',
-        'weight' => 39,
+        'weight' => 38,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4163,7 +4163,7 @@ function wob_instellingen_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 40,
+        'weight' => 39,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4322,7 +4322,7 @@ function wob_instellingen_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 42,
+        'weight' => 40,
       ),
       'teaser' => array(
         'label' => 'above',
