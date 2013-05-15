@@ -218,7 +218,6 @@ function calculated_field_field_object_ommission_days_javascript() {
 				enddate = deadline;
 			}
 
-			console.log("days", date.getDaysDifference(enddate));
 			$("#edit-field-object-ommission-days input").val(date.getDaysDifference(enddate));
 		}
 	';
