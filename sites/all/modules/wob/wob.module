@@ -104,6 +104,26 @@ function calculated_field_field_request_forfeited_penalty_javascript() {
 	';
 }
 
+function calculated_field_field_request_suspension_javascript() {
+	return '
+		if ($("#edit-field-request-suspension-enabled input").val()) {
+			var days;
+			var request = $("#edit-field-susp-third-party-sent input").datepicker("getDate");
+
+			if ($("#edit-field-susp-third-party-received input").val()) {
+				var response = $("#edit-field-susp-third-party-received input").datepicker("getDate");
+				days = request.getDate() - response.getDate();//(date of request to third party - date of response of said third party)
+			} else if ($("#edit-field-susp-third-party-deadline input").val()) {
+				var deadline = $("#edit-field-susp-third-party-deadline input").datepicker("getDate");
+				days = request.getDate() - deadline.getDate();//(date of request to third party - date of deadline for response of third party)
+			}
+
+			if (days)
+				$("#edit-field-request-suspension input").val(days);
+		}
+	';
+}
+
 function calculated_field_field_objection_deadline_date_javascript() {
 	return '
 		if (deadline = $("#edit-field-request-decision input").datepicker("getDate")) {
@@ -508,6 +528,14 @@ function wob_field_group_build_pre_render_alter(&$element) {
 		$element['group_right']['group_tabs']['group_request']['group_request_notice']['#states'] = array(
 			'visible' => array(
 				'#edit-field-request-notice-of-default input' => array('checked' => TRUE),
+			),
+		);
+	}
+
+	if (isset($element['group_right']['group_tabs']['group_request']['group_request_suspension'])) {
+		$element['group_right']['group_tabs']['group_request']['group_request_suspension']['#states'] = array(
+			'visible' => array(
+				'#edit-field-request-suspension-enabled input' => array('checked' => TRUE),
 			),
 		);
 	}
