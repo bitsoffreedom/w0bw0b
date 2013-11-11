@@ -459,13 +459,51 @@ function calculated_field_field_appeal_request_duration_javascript() {
 					enddate = $("#edit-field-objection-decision-date input").datepicker("getDate");
 				} else if ($("#edit-field-request-decision-received input").val()) {
 					enddate = $("#edit-field-request-decision-received input").datepicker("getDate");
-				} else if ($("#edit-field-request-decision-received input").val()) {
+				} else if ($("#edit-field-request-decision input").val()) {
 					enddate = $("#edit-field-request-decision input").datepicker("getDate");
 				}
 			}
 			$("#edit-field-appeal-request-duration input").val(date.getDaysDifference(enddate));
 		}
 	';
+}
+
+function computed_field_field_appeal_request_duration_co_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+	$entity_field[0]['value'] = NULL;
+
+	$wrapper = entity_metadata_wrapper($entity_type, $entity);
+
+	$date = NULL;
+	if ($value = $wrapper->field_request_date_received->value()) {
+		$date = new DateObject($value, NULL, 'U');
+	} else if ($value = $wrapper->field_request_date_sent->value()) {
+		$date = new DateObject($value, NULL, 'U');
+		$date->add(new DateInterval('P1D'));
+	} else if ($value = $wrapper->field_request_date_signed->value()) {
+		$date = new DateObject($value, NULL, 'U');
+		$date->add(new DateInterval('P1D'));
+	}
+
+	if ($date) {
+		$end_date = new DateObject();
+		$value = NULL;
+
+		if ($wrapper->field_status->value() != "open") {
+			if ($wrapper->field_appeal_judgement->value()) {
+				$value = $wrapper->field_appeal_judgement;
+			} else if ($wrapper->field_objection_decision_receive->value()) {
+				$value = $wrapper->field_objection_decision_receive->value();
+			} else if ($wrapper->field_objection_decision_date->value()) {
+				$value = $wrapper->field_objection_decision_date->value();
+			} else if ($wrapper->field_request_decision_received->value()) {
+				$value = $wrapper->field_request_decision_received->value();
+			} else if ($wrapper->field_request_decision->value()) {
+				$value = $wrapper->field_request_decision->value();
+			}
+			$end_date = new DateObject($value, NULL, 'U');
+		}
+		$entity_field[0]['value'] = $date->difference($end_date, 'days', FALSE);
+	}
 }
 
 function calculated_field_field_stats_penalty_calculated_javascript() {
