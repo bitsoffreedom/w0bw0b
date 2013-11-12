@@ -312,25 +312,25 @@ function calculated_field_field_action_required_date_javascript() {
 					date.setDate(date.getDate() - 7);
 				} else {
 					if ($("#edit-field-objection-decision-date input").val().length == 0) {
-					if (!$("#edit-field-objection-notice-received input").val().length == 0) {
-						date = $("#edit-field-objection-notice-received input").datepicker("getDate");
-						date.setDate(date.getDate() + 57); // 1 + 14 + 42 days
-					} else if (!$("#edit-field-objection-notice-sent-date input").val().length == 0) {
-						date = $("#edit-field-objection-notice-sent-date input").datepicker("getDate");
-						date.setDate(date.getDate() + 58); // 1 + 14 + 42 + 1 days
+						if (!$("#edit-field-objection-notice-received input").val().length == 0) {
+							date = $("#edit-field-objection-notice-received input").datepicker("getDate");
+							date.setDate(date.getDate() + 57); // 1 + 14 + 42 days
+						} else if (!$("#edit-field-objection-notice-sent-date input").val().length == 0) {
+							date = $("#edit-field-objection-notice-sent-date input").datepicker("getDate");
+							date.setDate(date.getDate() + 58); // 1 + 14 + 42 + 1 days
+						} else {
+							date = $("#edit-field-objection-deadline-2 input").datepicker("getDate");
+						}
 					} else {
-						date = $("#edit-field-objection-deadline-2 input").datepicker("getDate");
-					}
-					} else {
-					if (!$("#edit-field-appeal-sent input").is(":checked")) {
-						date = $("#edit-field-appeal-deadline input").datepicker("getDate");
-						date.setDate(date.getDate() - 7);
-					}
+						if (!$("#edit-field-appeal-sent input").is(":checked")) {
+							date = $("#edit-field-appeal-deadline input").datepicker("getDate");
+							date.setDate(date.getDate() - 7);
+						}
 					}
 				}
 			}
 			if (date)
-			$("#edit-field-action-required-date input").datepicker("setDate", date);
+				$("#edit-field-action-required-date input").datepicker("setDate", date);
 		}
 	';
 }
