@@ -467,7 +467,7 @@ function calculated_field_field_stats_appeal_duration_javascript() {
 				if ($("#edit-field-appeal-completed input").val()) {
 					enddate = $("#edit-field-appeal-completed input").datepicker("getDate");
 				}
-				$("#edit-field-stats-objection-duration input").val(date.getDaysDifference(enddate));
+				$("#edit-field-stats-appeal-duration input").val(date.getDaysDifference(enddate));
 			}
 		}
 	';
