@@ -646,3 +646,39 @@ function wob_field_group_build_pre_render_alter(&$element) {
 		);
 	}
 }
+
+function wob_preprocess_horizontal_tabs(&$variables) {
+	if ($variables['element']['#id'] == 'node_wob_full_group_tabs') {
+		if (!isset($variables['element']['#default_tab_rendered'])) {
+			$variables['element']['#default_tab_rendered'] = TRUE;
+
+			// Load the current node
+			$node = node_load(arg(1));
+			$wrapper = entity_metadata_wrapper('node', $node);
+
+			// Determine the current phase, and set the active tab accordingly
+			$selected_tab = NULL;
+			$phase = $wrapper->field_current_phase->value();
+			switch ($phase) {
+				case 'bezwaar':
+					$selected_tab = 'node_wob_full_group_objection';
+					break;
+				case 'beroep':
+					$selected_tab = 'node_wob_full_group_appeal';
+					break;
+			}
+		
+			// When we have selected a tab, append a hidden input, so that horizontal-tabs.js will pick it up
+			if ($selected_tab) {
+				$default_tab = array(
+					'#type' => 'hidden',
+					'#value' => $selected_tab,
+					'#attributes' => array('class' => array('horizontal-tabs-active-tab')),
+					'#weight' => -100,
+				);
+
+				$variables['element']['#children'] .= render($default_tab);
+			}
+		}
+	}
+}
