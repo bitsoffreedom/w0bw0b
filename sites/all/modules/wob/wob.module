@@ -364,9 +364,9 @@ function calculated_field_field_status_javascript() {
 			} else {
 				var deadline = $("#edit-field-appeal-deadline input").datepicker("getDate");
 				if (deadline && deadline.getTime() > today.getTime()) {
-					$("#edit-field-status select").val("afgerond");
-				} else {
 					$("#edit-field-status select").val("open");
+				} else {
+					$("#edit-field-status select").val("afgerond");
 				}
 			}
 		} else {
@@ -382,6 +382,46 @@ function calculated_field_field_status_javascript() {
 			}
 		}
 	';
+}
+
+function computed_field_field_status_computed_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+	$entity_field[0]['value'] = NULL;
+
+	$wrapper = entity_metadata_wrapper($entity_type, $entity);
+
+	$today = new DateObject();
+
+	if (strlen($wrapper->field_ending_reason->value()) > 0) {
+		$entity_field[0]['value'] = "afgerond";
+	} else if ($wrapper->field_current_phase->value() == 'beroep') {
+		if (strlen($wrapper->field_appeal_completed->value()) > 0) {
+			$entity_field[0]['value'] = "afgerond";
+		} else {
+			$entity_field[0]['value'] = "open";
+		}
+	} else if ($wrapper->field_current_phase->value() == 'bezwaar') {
+		if (strlen($wrapper->field_objection_decision_date->value()) > 0) {
+			$entity_field[0]['value'] = "afgerond";
+		} else {
+			$deadline = new DateObject($wrapper->field_appeal_deadline->value(), NULL, 'U');
+			if ($deadline && $deadline > $today) {
+				$entity_field[0]['value'] = "open";
+			} else {
+				$entity_field[0]['value'] = "afgerond";
+			}
+		}
+	} else {
+		if (strlen($wrapper->field_request_decision->value()) > 0) {
+			$deadline = new DateObject($wrapper->field_objection_deadline_date->value(), NULL, 'U');
+			if ($deadline && $deadline > $today) {
+				$entity_field[0]['value'] = "open";
+			} else {
+				$entity_field[0]['value'] = "afgerond";
+			}
+		} else {
+			$entity_field[0]['value'] = "open";
+		}
+	}
 }
 
 function calculated_field_field_stats_request_duration_javascript() {
