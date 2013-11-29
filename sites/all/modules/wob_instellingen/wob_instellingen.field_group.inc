@@ -171,12 +171,12 @@ function wob_instellingen_field_group_info() {
     'children' => array(
       0 => 'body',
       1 => 'field_law',
-      2 => 'field_status',
-      3 => 'field_action_required_date',
-      4 => 'field_organisation_term',
-      5 => 'field_ending_reason',
-      6 => 'field_current_phase',
-      7 => 'field_request_id',
+      2 => 'field_action_required_date',
+      3 => 'field_organisation_term',
+      4 => 'field_ending_reason',
+      5 => 'field_current_phase',
+      6 => 'field_request_id',
+      7 => 'field_status_computed',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -664,6 +664,37 @@ function wob_instellingen_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_opschorting_beslissing|node|wob|default';
+  $field_group->group_name = 'group_opschorting_beslissing';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'wob';
+  $field_group->mode = 'default';
+  $field_group->parent_name = 'group_request';
+  $field_group->data = array(
+    'label' => 'Opschorting beslissing',
+    'weight' => '34',
+    'children' => array(
+      0 => 'field_request_suspension',
+      1 => 'field_suspension_signed',
+      2 => 'field_suspension_notice_received',
+      3 => 'field_susp_third_party_sent',
+      4 => 'field_susp_third_party_deadline',
+      5 => 'field_susp_third_party_received',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+      ),
+    ),
+  );
+  $export['group_opschorting_beslissing|node|wob|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_request_addendum|node|wob|default';
   $field_group->group_name = 'group_request_addendum';
   $field_group->entity_type = 'node';
@@ -797,7 +828,7 @@ function wob_instellingen_field_group_info() {
   $field_group->parent_name = 'group_request';
   $field_group->data = array(
     'label' => 'Beroep niet tijdig nemen beslissing',
-    'weight' => '36',
+    'weight' => '43',
     'children' => array(
       0 => 'field_request_appeal_sent',
       1 => 'field_request_appeal_received',
@@ -916,6 +947,38 @@ function wob_instellingen_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_request_suspension|node|wob|form';
+  $field_group->group_name = 'group_request_suspension';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'wob';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_request';
+  $field_group->data = array(
+    'label' => 'Opschorting beslissing',
+    'weight' => '61',
+    'children' => array(
+      0 => 'field_request_suspension',
+      1 => 'field_suspension_signed',
+      2 => 'field_suspension_notice_received',
+      3 => 'field_susp_third_party_sent',
+      4 => 'field_susp_third_party_deadline',
+      5 => 'field_susp_third_party_received',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'formatter' => 'collapsible',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $export['group_request_suspension|node|wob|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_request|node|wob|default';
   $field_group->group_name = 'group_request';
   $field_group->entity_type = 'node';
@@ -928,22 +991,23 @@ function wob_instellingen_field_group_info() {
     'children' => array(
       0 => 'field_request_date_sent',
       1 => 'field_request_date_received',
-      2 => 'field_request_suspension',
-      3 => 'field_request_adjourned',
-      4 => 'field_request_notice_of_default',
-      5 => 'field_request_leniency',
-      6 => 'field_request_decision',
-      7 => 'field_request_decision_deadline2',
-      8 => 'field_request_decision_sent',
-      9 => 'field_request_decision_received',
-      10 => 'field_request_date_signed',
-      11 => 'field_request_appeal',
-      12 => 'field_request_addendum',
-      13 => 'field_request_days_left_calc',
+      2 => 'field_request_adjourned',
+      3 => 'field_request_notice_of_default',
+      4 => 'field_request_leniency',
+      5 => 'field_request_decision',
+      6 => 'field_request_decision_deadline2',
+      7 => 'field_request_decision_sent',
+      8 => 'field_request_decision_received',
+      9 => 'field_request_date_signed',
+      10 => 'field_request_appeal',
+      11 => 'field_request_addendum',
+      12 => 'field_request_days_left_calc',
+      13 => 'field_request_suspension_enabled',
       14 => 'group_request_addendum',
       15 => 'group_request_adjourned',
       16 => 'group_request_appeal',
       17 => 'group_request_notice',
+      18 => 'group_opschorting_beslissing',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -972,23 +1036,24 @@ function wob_instellingen_field_group_info() {
     'children' => array(
       0 => 'field_request_date_sent',
       1 => 'field_request_date_received',
-      2 => 'field_request_suspension',
-      3 => 'field_request_adjourned',
-      4 => 'field_request_notice_of_default',
-      5 => 'field_request_leniency',
-      6 => 'field_request_decision',
-      7 => 'field_request_days_left_int',
-      8 => 'field_request_decision_deadline2',
-      9 => 'field_request_decision_sent',
-      10 => 'field_request_decision_received',
-      11 => 'field_request_date_signed',
-      12 => 'field_request_appeal',
-      13 => 'field_request_addendum',
-      14 => 'field_request_days_left_calc',
+      2 => 'field_request_adjourned',
+      3 => 'field_request_notice_of_default',
+      4 => 'field_request_leniency',
+      5 => 'field_request_decision',
+      6 => 'field_request_days_left_int',
+      7 => 'field_request_decision_deadline2',
+      8 => 'field_request_decision_sent',
+      9 => 'field_request_decision_received',
+      10 => 'field_request_date_signed',
+      11 => 'field_request_appeal',
+      12 => 'field_request_addendum',
+      13 => 'field_request_days_left_calc',
+      14 => 'field_request_suspension_enabled',
       15 => 'group_request_addendum',
       16 => 'group_request_adjourned',
       17 => 'group_request_appeal',
       18 => 'group_request_notice',
+      19 => 'group_request_suspension',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -1078,12 +1143,12 @@ function wob_instellingen_field_group_info() {
     'label' => 'Statistiek',
     'weight' => '6',
     'children' => array(
-      0 => 'field_appeal_request_duration',
-      1 => 'field_stats_appeal_duration',
-      2 => 'field_stats_objection_duration',
-      3 => 'field_stats_penalty_calculated',
-      4 => 'field_stats_penalty_received',
-      5 => 'field_stats_request_duration',
+      0 => 'field_stats_appeal_duration',
+      1 => 'field_stats_objection_duration',
+      2 => 'field_stats_penalty_calculated',
+      3 => 'field_stats_penalty_received',
+      4 => 'field_stats_request_duration',
+      5 => 'field_appeal_request_duration_co',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -1111,11 +1176,11 @@ function wob_instellingen_field_group_info() {
     'weight' => '6',
     'children' => array(
       0 => 'field_appeal_request_duration',
-      1 => 'field_stats_request_duration',
-      2 => 'field_stats_appeal_duration',
-      3 => 'field_stats_objection_duration',
-      4 => 'field_stats_penalty_calculated',
-      5 => 'field_stats_penalty_received',
+      1 => 'field_stats_appeal_duration',
+      2 => 'field_stats_objection_duration',
+      3 => 'field_stats_penalty_calculated',
+      4 => 'field_stats_penalty_received',
+      5 => 'field_stats_request_duration',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

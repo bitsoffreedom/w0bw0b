@@ -52,8 +52,9 @@ function wob_instellingen_views_default_views() {
     'title' => 'title',
     'field_organisation_term' => 'field_organisation_term',
     'field_current_phase' => 'field_current_phase',
-    'field_status' => 'field_status',
+    'field_status_computed' => 'field_status_computed',
     'field_appeal_request_duration' => 'field_appeal_request_duration',
+    'field_appeal_request_duration_co' => 'field_appeal_request_duration_co',
   );
   $handler->display->display_options['style_options']['default'] = 'field_action_required_date';
   $handler->display->display_options['style_options']['info'] = array(
@@ -97,7 +98,7 @@ function wob_instellingen_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_status' => array(
+    'field_status_computed' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -105,6 +106,13 @@ function wob_instellingen_views_default_views() {
       'empty_column' => 0,
     ),
     'field_appeal_request_duration' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_appeal_request_duration_co' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -152,18 +160,70 @@ function wob_instellingen_views_default_views() {
   $handler->display->display_options['fields']['field_current_phase']['table'] = 'field_data_field_current_phase';
   $handler->display->display_options['fields']['field_current_phase']['field'] = 'field_current_phase';
   /* Veld: Inhoud: Status */
-  $handler->display->display_options['fields']['field_status']['id'] = 'field_status';
-  $handler->display->display_options['fields']['field_status']['table'] = 'field_data_field_status';
-  $handler->display->display_options['fields']['field_status']['field'] = 'field_status';
+  $handler->display->display_options['fields']['field_status_computed']['id'] = 'field_status_computed';
+  $handler->display->display_options['fields']['field_status_computed']['table'] = 'field_data_field_status_computed';
+  $handler->display->display_options['fields']['field_status_computed']['field'] = 'field_status_computed';
   /* Veld: Inhoud: Duur alle fasen */
-  $handler->display->display_options['fields']['field_appeal_request_duration']['id'] = 'field_appeal_request_duration';
-  $handler->display->display_options['fields']['field_appeal_request_duration']['table'] = 'field_data_field_appeal_request_duration';
-  $handler->display->display_options['fields']['field_appeal_request_duration']['field'] = 'field_appeal_request_duration';
-  $handler->display->display_options['fields']['field_appeal_request_duration']['label'] = 'Looptijd';
-  $handler->display->display_options['fields']['field_appeal_request_duration']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_appeal_request_duration']['settings'] = array(
-    'thousand_separator' => ' ',
-    'prefix_suffix' => 1,
+  $handler->display->display_options['fields']['field_appeal_request_duration_co']['id'] = 'field_appeal_request_duration_co';
+  $handler->display->display_options['fields']['field_appeal_request_duration_co']['table'] = 'field_data_field_appeal_request_duration_co';
+  $handler->display->display_options['fields']['field_appeal_request_duration_co']['field'] = 'field_appeal_request_duration_co';
+  $handler->display->display_options['fields']['field_appeal_request_duration_co']['label'] = 'Looptijd';
+  $handler->display->display_options['fields']['field_appeal_request_duration_co']['type'] = 'custom_formatters_clone_of_amount_of_days_left_computed_int_';
+  $handler->display->display_options['fields']['field_appeal_request_duration_co']['settings'] = array(
+    'relationship' => 'none',
+    'ui_name' => '',
+    'custom_label' => 0,
+    'label' => '',
+    'element_label_colon' => 0,
+    'exclude' => 0,
+    'element_type_enable' => 0,
+    'element_type' => '',
+    'element_class_enable' => 0,
+    'element_class' => '',
+    'element_label_type_enable' => 0,
+    'element_label_type' => '',
+    'element_label_class_enable' => 0,
+    'element_label_class' => '',
+    'element_wrapper_type_enable' => 0,
+    'element_wrapper_type' => '',
+    'element_wrapper_class_enable' => 0,
+    'element_wrapper_class' => '',
+    'element_default_classes' => 0,
+    'alter' => array(
+      'alter_text' => 0,
+      'text' => '',
+      'make_link' => 0,
+      'path' => '',
+      'absolute' => 0,
+      'replace_spaces' => 0,
+      'external' => 0,
+      'path_case' => 'none',
+      'link_class' => '',
+      'alt' => '',
+      'rel' => '',
+      'prefix' => '',
+      'suffix' => '',
+      'target' => '',
+      'trim' => 0,
+      'max_length' => '',
+      'word_boundary' => 0,
+      'ellipsis' => 0,
+      'more_link' => 0,
+      'more_link_text' => '',
+      'more_link_path' => '',
+      'html' => 0,
+      'strip_tags' => 0,
+      'preserve_tags' => '',
+      'trim_whitespace' => 0,
+      'nl2br' => 0,
+    ),
+    'empty' => '',
+    'empty_zero' => 0,
+    'hide_empty' => 0,
+    'hide_alter_empty' => 0,
+    'click_sort_column' => 'value',
+    'type' => '',
+    'field_api_classes' => 0,
   );
   /* Sorteercriterium: Inhoud: Actie in (field_action_required_date) */
   $handler->display->display_options['sorts']['field_action_required_date_value']['id'] = 'field_action_required_date_value';
@@ -183,30 +243,42 @@ function wob_instellingen_views_default_views() {
   $handler->display->display_options['filters']['type']['value'] = array(
     'wob' => 'wob',
   );
-  /* Filtercriterium: Inhoud: Status (field_status) */
-  $handler->display->display_options['filters']['field_status_value']['id'] = 'field_status_value';
-  $handler->display->display_options['filters']['field_status_value']['table'] = 'field_data_field_status';
-  $handler->display->display_options['filters']['field_status_value']['field'] = 'field_status_value';
-  $handler->display->display_options['filters']['field_status_value']['value'] = array(
-    'open' => 'open',
-    'afgerond' => 'afgerond',
-    'anders' => 'anders',
-  );
-  $handler->display->display_options['filters']['field_status_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_status_value']['expose']['operator_id'] = 'field_status_value_op';
-  $handler->display->display_options['filters']['field_status_value']['expose']['label'] = 'Status';
-  $handler->display->display_options['filters']['field_status_value']['expose']['operator'] = 'field_status_value_op';
-  $handler->display->display_options['filters']['field_status_value']['expose']['identifier'] = 'field_status_value';
-  $handler->display->display_options['filters']['field_status_value']['expose']['remember_roles'] = array(
-    2 => '2',
-    1 => 0,
-    4 => 0,
-    3 => 0,
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  /* Filtercriterium: Inhoud: Status (field_status_computed) */
+  $handler->display->display_options['filters']['field_status_computed_value']['id'] = 'field_status_computed_value';
+  $handler->display->display_options['filters']['field_status_computed_value']['table'] = 'field_data_field_status_computed';
+  $handler->display->display_options['filters']['field_status_computed_value']['field'] = 'field_status_computed_value';
+  $handler->display->display_options['filters']['field_status_computed_value']['group'] = 1;
+  $handler->display->display_options['filters']['field_status_computed_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_status_computed_value']['expose']['operator_id'] = 'field_status_computed_value_op';
+  $handler->display->display_options['filters']['field_status_computed_value']['expose']['label'] = 'Status (field_status_computed)';
+  $handler->display->display_options['filters']['field_status_computed_value']['expose']['operator'] = 'field_status_computed_value_op';
+  $handler->display->display_options['filters']['field_status_computed_value']['expose']['identifier'] = 'field_status_computed_value';
+  $handler->display->display_options['filters']['field_status_computed_value']['is_grouped'] = TRUE;
+  $handler->display->display_options['filters']['field_status_computed_value']['group_info']['label'] = 'Status';
+  $handler->display->display_options['filters']['field_status_computed_value']['group_info']['identifier'] = 'field_status_computed_value';
+  $handler->display->display_options['filters']['field_status_computed_value']['group_info']['group_items'] = array(
+    1 => array(
+      'title' => 'Open',
+      'operator' => '=',
+      'value' => 'open',
+    ),
+    2 => array(
+      'title' => 'Afgerond',
+      'operator' => '=',
+      'value' => 'afgerond',
+    ),
+    3 => array(
+      'title' => '',
+      'operator' => '=',
+      'value' => '',
+    ),
   );
   /* Filtercriterium: Inhoud: Organisatie (field_organisation_term) */
   $handler->display->display_options['filters']['field_organisation_term_tid']['id'] = 'field_organisation_term_tid';
   $handler->display->display_options['filters']['field_organisation_term_tid']['table'] = 'field_data_field_organisation_term';
   $handler->display->display_options['filters']['field_organisation_term_tid']['field'] = 'field_organisation_term_tid';
+  $handler->display->display_options['filters']['field_organisation_term_tid']['group'] = 1;
   $handler->display->display_options['filters']['field_organisation_term_tid']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_organisation_term_tid']['expose']['operator_id'] = 'field_organisation_term_tid_op';
   $handler->display->display_options['filters']['field_organisation_term_tid']['expose']['label'] = 'Organisatie';
@@ -224,6 +296,7 @@ function wob_instellingen_views_default_views() {
   $handler->display->display_options['filters']['field_current_phase_value']['id'] = 'field_current_phase_value';
   $handler->display->display_options['filters']['field_current_phase_value']['table'] = 'field_data_field_current_phase';
   $handler->display->display_options['filters']['field_current_phase_value']['field'] = 'field_current_phase_value';
+  $handler->display->display_options['filters']['field_current_phase_value']['group'] = 1;
   $handler->display->display_options['filters']['field_current_phase_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_current_phase_value']['expose']['operator_id'] = 'field_current_phase_value_op';
   $handler->display->display_options['filters']['field_current_phase_value']['expose']['label'] = 'Fase';
@@ -262,6 +335,7 @@ function wob_instellingen_views_default_views() {
     t('Fase'),
     t('Status'),
     t('Looptijd'),
+    t('Status (field_status_computed)'),
     t('Page'),
   );
   $export['wob_overview'] = $view;

@@ -214,7 +214,7 @@ function wob_instellingen_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 57,
+        'weight' => 58,
       ),
       'teaser' => array(
         'label' => 'hidden',
@@ -258,7 +258,7 @@ function wob_instellingen_field_default_field_instances() {
         'module' => 'custom_formatters',
         'settings' => array(),
         'type' => 'custom_formatters_amount_of_days_date_future_',
-        'weight' => 56,
+        'weight' => 57,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -491,7 +491,7 @@ function wob_instellingen_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 7,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -635,15 +635,9 @@ function wob_instellingen_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'number',
-        'settings' => array(
-          'decimal_separator' => '.',
-          'prefix_suffix' => TRUE,
-          'scale' => 0,
-          'thousand_separator' => ' ',
-        ),
-        'type' => 'number_integer',
-        'weight' => 62,
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 4,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -668,7 +662,43 @@ function wob_instellingen_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 52,
+      'weight' => 51,
+    ),
+  );
+
+  // Exported field_instance: 'node-wob-field_appeal_request_duration_co'
+  $field_instances['node-wob-field_appeal_request_duration_co'] = array(
+    'bundle' => 'wob',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'custom_formatters',
+        'settings' => array(),
+        'type' => 'custom_formatters_amount_of_days_left_computed_int_',
+        'weight' => 63,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_appeal_request_duration_co',
+    'label' => 'Duur alle fasen',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'computed_field',
+      'settings' => array(),
+      'type' => 'computed',
+      'weight' => 141,
     ),
   );
 
@@ -864,7 +894,7 @@ function wob_instellingen_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 58,
+        'weight' => 59,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -2742,6 +2772,40 @@ function wob_instellingen_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-wob-field_objection_penalty_days_cal'
+  $field_instances['node-wob-field_objection_penalty_days_cal'] = array(
+    'bundle' => 'wob',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_objection_penalty_days_cal',
+    'label' => 'Aantal dwangsom dagen',
+    'required' => FALSE,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'module' => 'computed_field',
+      'settings' => array(),
+      'type' => 'computed',
+      'weight' => 120,
+    ),
+  );
+
   // Exported field_instance: 'node-wob-field_objection_penalty_paid'
   $field_instances['node-wob-field_objection_penalty_paid'] = array(
     'bundle' => 'wob',
@@ -3592,7 +3656,7 @@ function wob_instellingen_field_default_field_instances() {
         'module' => 'list',
         'settings' => array(),
         'type' => 'list_default',
-        'weight' => 35,
+        'weight' => 42,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4081,7 +4145,7 @@ function wob_instellingen_field_default_field_instances() {
         'module' => 'custom_formatters',
         'settings' => array(),
         'type' => 'custom_formatters_amount_of_days_left_computed_int_',
-        'weight' => 38,
+        'weight' => 45,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4117,7 +4181,7 @@ function wob_instellingen_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 6,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4163,7 +4227,7 @@ function wob_instellingen_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 39,
+        'weight' => 46,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4216,7 +4280,7 @@ function wob_instellingen_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 37,
+        'weight' => 44,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4269,7 +4333,7 @@ function wob_instellingen_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 41,
+        'weight' => 48,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4322,7 +4386,7 @@ function wob_instellingen_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 40,
+        'weight' => 47,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4461,7 +4525,7 @@ function wob_instellingen_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_integer',
-        'weight' => 34,
+        'weight' => 41,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4704,7 +4768,7 @@ function wob_instellingen_field_default_field_instances() {
         'label' => 'inline',
         'module' => 'custom_formatters',
         'settings' => array(),
-        'type' => 'custom_formatters_amount_of_days_left_computed_int_',
+        'type' => 'custom_formatters_clone_of_amount_of_days_left_computed_int_',
         'weight' => 36,
       ),
       'teaser' => array(
@@ -4741,7 +4805,7 @@ function wob_instellingen_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 2,
+        'weight' => 5,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4833,7 +4897,7 @@ function wob_instellingen_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_integer',
-        'weight' => 33,
+        'weight' => 40,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4858,7 +4922,52 @@ function wob_instellingen_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 61,
+      'weight' => 140,
+    ),
+  );
+
+  // Exported field_instance: 'node-wob-field_request_suspension_enabled'
+  $field_instances['node-wob-field_request_suspension_enabled'] = array(
+    'bundle' => 'wob',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'default_value_function' => '',
+    'default_value_php' => '',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 33,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_request_suspension_enabled',
+    'label' => 'Opschorting beslissing',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 60,
     ),
   );
 
@@ -4973,7 +5082,7 @@ function wob_instellingen_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_integer',
-        'weight' => 63,
+        'weight' => 64,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -4999,7 +5108,7 @@ function wob_instellingen_field_default_field_instances() {
       'module' => 'number',
       'settings' => array(),
       'type' => 'number',
-      'weight' => 53,
+      'weight' => 52,
     ),
   );
 
@@ -5020,7 +5129,7 @@ function wob_instellingen_field_default_field_instances() {
           'thousand_separator' => ' ',
         ),
         'type' => 'number_integer',
-        'weight' => 64,
+        'weight' => 65,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5108,10 +5217,9 @@ function wob_instellingen_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'list',
         'settings' => array(),
-        'type' => 'list_default',
-        'weight' => 55,
+        'type' => 'hidden',
+        'weight' => 2,
       ),
       'teaser' => array(
         'label' => 'above',
@@ -5133,6 +5241,307 @@ function wob_instellingen_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 7,
+    ),
+  );
+
+  // Exported field_instance: 'node-wob-field_status_computed'
+  $field_instances['node-wob-field_status_computed'] = array(
+    'bundle' => 'wob',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'computed_field',
+        'settings' => array(),
+        'type' => 'computed_field_plain',
+        'weight' => 56,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_status_computed',
+    'label' => 'Status',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'computed_field',
+      'settings' => array(),
+      'type' => 'computed',
+      'weight' => 142,
+    ),
+  );
+
+  // Exported field_instance: 'node-wob-field_susp_third_party_deadline'
+  $field_instances['node-wob-field_susp_third_party_deadline'] = array(
+    'bundle' => 'wob',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 38,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_susp_third_party_deadline',
+    'label' => 'Deadline mening derde partij',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'd/m/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'none',
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 138,
+    ),
+  );
+
+  // Exported field_instance: 'node-wob-field_susp_third_party_received'
+  $field_instances['node-wob-field_susp_third_party_received'] = array(
+    'bundle' => 'wob',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 39,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_susp_third_party_received',
+    'label' => 'Ontvangstdatum',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'd/m/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'none',
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 139,
+    ),
+  );
+
+  // Exported field_instance: 'node-wob-field_susp_third_party_sent'
+  $field_instances['node-wob-field_susp_third_party_sent'] = array(
+    'bundle' => 'wob',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 37,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_susp_third_party_sent',
+    'label' => 'Verzenddatum mening derde partij',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'd/m/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'none',
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 137,
+    ),
+  );
+
+  // Exported field_instance: 'node-wob-field_suspension_notice_received'
+  $field_instances['node-wob-field_suspension_notice_received'] = array(
+    'bundle' => 'wob',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 36,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_suspension_notice_received',
+    'label' => 'Ontvangstdatum',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'd/m/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'none',
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 136,
+    ),
+  );
+
+  // Exported field_instance: 'node-wob-field_suspension_signed'
+  $field_instances['node-wob-field_suspension_signed'] = array(
+    'bundle' => 'wob',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'inline',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 35,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_suspension_signed',
+    'label' => 'Dagtekening',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'blank',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'd/m/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'none',
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 135,
     ),
   );
 
@@ -5182,6 +5591,7 @@ function wob_instellingen_field_default_field_instances() {
   t('Deadline aantekenen bezwaar');
   t('Deadline aanvulling');
   t('Deadline beroepschrift');
+  t('Deadline mening derde partij');
   t('Deadline voor beslissing');
   t('Description');
   t('Duur alle fasen');
@@ -5230,6 +5640,7 @@ function wob_instellingen_field_default_field_instances() {
   t('Verzenddatum beroepschrift');
   t('Verzenddatum beslissing');
   t('Verzenddatum bezwaarschrift');
+  t('Verzenddatum mening derde partij');
   t('Verzenddatum verdaging');
   t('Verzenddatum verzoek');
   t('Verzoek aanvulling');

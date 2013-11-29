@@ -69,5 +69,18 @@ else
   $formatter->fapi = '';
   $export['amount_of_days_left_int_'] = $formatter;
 
+  $formatter = new stdClass();
+  $formatter->disabled = FALSE; /* Edit this to true to make a default formatter disabled initially */
+  $formatter->api_version = 2;
+  $formatter->name = 'clone_of_amount_of_days_left_computed_int_';
+  $formatter->label = 'Amount of days (computed int)';
+  $formatter->description = '';
+  $formatter->mode = 'php';
+  $formatter->field_types = 'computed';
+  $formatter->code = '$days = $variables[\'#items\'][0][\'value\'];
+return \'<span>\' . format_plural(abs($days), "@count day", "@count days") . \'</span>\';';
+  $formatter->fapi = '';
+  $export['clone_of_amount_of_days_left_computed_int_'] = $formatter;
+
   return $export;
 }

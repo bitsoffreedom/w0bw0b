@@ -94,7 +94,7 @@ function wob_instellingen_field_default_field_bases() {
         'year' => 'year',
       ),
       'javascript' => '',
-      'locked' => TRUE,
+      'locked' => FALSE,
       'timezone_db' => '',
       'todate' => '',
       'tz_handling' => 'none',
@@ -331,10 +331,43 @@ function wob_instellingen_field_default_field_bases() {
     'module' => 'number',
     'settings' => array(
       'javascript' => '',
-      'locked' => TRUE,
+      'locked' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'number_integer',
+  );
+
+  // Exported field_base: 'field_appeal_request_duration_co'
+  $field_bases['field_appeal_request_duration_co'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_appeal_request_duration_co',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'computed_field',
+    'settings' => array(
+      'code' => '$entity_field[0][\'value\'] = "";',
+      'database' => array(
+        'data_default' => '',
+        'data_index' => 0,
+        'data_length' => 32,
+        'data_not_NULL' => 0,
+        'data_precision' => 10,
+        'data_scale' => 2,
+        'data_size' => 'normal',
+        'data_type' => 'int',
+      ),
+      'display_format' => '$display_output = $entity_field_item[\'value\'];',
+      'javascript' => '',
+      'locked' => FALSE,
+      'store' => 1,
+      'weight' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'computed',
   );
 
   // Exported field_base: 'field_appeal_sent'
@@ -1504,7 +1537,7 @@ if (deadline = $(\'#edit-field-request-decision input\').datepicker().datepicker
     'module' => 'number',
     'settings' => array(
       'javascript' => '',
-      'locked' => FALSE,
+      'locked' => TRUE,
     ),
     'translatable' => 0,
     'type' => 'number_integer',
@@ -1633,6 +1666,37 @@ if (deadline = $(\'#edit-field-request-decision input\').datepicker().datepicker
     ),
     'translatable' => 0,
     'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_objection_penalty_days_cal'
+  $field_bases['field_objection_penalty_days_cal'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_objection_penalty_days_cal',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'computed_field',
+    'settings' => array(
+      'code' => 'computed_field_field_penalty_days_calc_compute()',
+      'database' => array(
+        'data_default' => '',
+        'data_index' => 0,
+        'data_length' => 32,
+        'data_not_NULL' => 0,
+        'data_precision' => 10,
+        'data_scale' => 2,
+        'data_size' => 'normal',
+        'data_type' => 'int',
+      ),
+      'display_format' => '$display_output = $entity_field_item[\'value\'];',
+      'store' => 1,
+      'weight' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'computed',
   );
 
   // Exported field_base: 'field_objection_penalty_paid'
@@ -2890,10 +2954,39 @@ if (deadline = $(\'#edit-field-request-decision input\').datepicker().datepicker
     'module' => 'number',
     'settings' => array(
       'javascript' => '',
-      'locked' => FALSE,
+      'locked' => TRUE,
     ),
     'translatable' => 0,
     'type' => 'number_integer',
+  );
+
+  // Exported field_base: 'field_request_suspension_enabled'
+  $field_bases['field_request_suspension_enabled'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_request_suspension_enabled',
+    'foreign keys' => array(),
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        0 => 'nee',
+        1 => 'ja',
+      ),
+      'allowed_values_function' => '',
+      'allowed_values_php' => '',
+      'javascript' => '',
+      'locked' => FALSE,
+    ),
+    'translatable' => 0,
+    'type' => 'list_boolean',
   );
 
   // Exported field_base: 'field_stats_appeal_duration'
@@ -2944,7 +3037,7 @@ if (deadline = $(\'#edit-field-request-decision input\').datepicker().datepicker
     'module' => 'number',
     'settings' => array(
       'javascript' => '',
-      'locked' => TRUE,
+      'locked' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'number_integer',
@@ -2963,7 +3056,7 @@ if (deadline = $(\'#edit-field-request-decision input\').datepicker().datepicker
     'module' => 'number',
     'settings' => array(
       'javascript' => '',
-      'locked' => TRUE,
+      'locked' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'number_integer',
@@ -2982,7 +3075,7 @@ if (deadline = $(\'#edit-field-request-decision input\').datepicker().datepicker
     'module' => 'number',
     'settings' => array(
       'javascript' => '',
-      'locked' => TRUE,
+      'locked' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'number_integer',
@@ -3016,6 +3109,199 @@ if (deadline = $(\'#edit-field-request-decision input\').datepicker().datepicker
     ),
     'translatable' => 0,
     'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field_status_computed'
+  $field_bases['field_status_computed'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_status_computed',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'computed_field',
+    'settings' => array(
+      'code' => '$entity_field[0][\'value\'] = "";',
+      'database' => array(
+        'data_default' => '',
+        'data_index' => 0,
+        'data_length' => 32,
+        'data_not_NULL' => 0,
+        'data_precision' => 10,
+        'data_scale' => 2,
+        'data_size' => 'normal',
+        'data_type' => 'text',
+      ),
+      'display_format' => '$display_output = $entity_field_item[\'value\'];',
+      'javascript' => '',
+      'locked' => FALSE,
+      'store' => 1,
+      'weight' => 0,
+    ),
+    'translatable' => 0,
+    'type' => 'computed',
+  );
+
+  // Exported field_base: 'field_susp_third_party_deadline'
+  $field_bases['field_susp_third_party_deadline'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_susp_third_party_deadline',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'javascript' => '',
+      'locked' => FALSE,
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_susp_third_party_received'
+  $field_bases['field_susp_third_party_received'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_susp_third_party_received',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'javascript' => '',
+      'locked' => FALSE,
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_susp_third_party_sent'
+  $field_bases['field_susp_third_party_sent'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_susp_third_party_sent',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'javascript' => '',
+      'locked' => FALSE,
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_suspension_notice_received'
+  $field_bases['field_suspension_notice_received'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_suspension_notice_received',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'javascript' => '',
+      'locked' => FALSE,
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
+  );
+
+  // Exported field_base: 'field_suspension_signed'
+  $field_bases['field_suspension_signed'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_suspension_signed',
+    'foreign keys' => array(),
+    'indexes' => array(),
+    'locked' => 0,
+    'module' => 'date',
+    'settings' => array(
+      'cache_count' => 4,
+      'cache_enabled' => 0,
+      'granularity' => array(
+        'day' => 'day',
+        'hour' => 0,
+        'minute' => 0,
+        'month' => 'month',
+        'second' => 0,
+        'year' => 'year',
+      ),
+      'javascript' => '',
+      'locked' => FALSE,
+      'timezone_db' => '',
+      'todate' => '',
+      'tz_handling' => 'none',
+    ),
+    'translatable' => 0,
+    'type' => 'datetime',
   );
 
   // Exported field_base: 'field_timestamp'
