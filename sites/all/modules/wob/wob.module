@@ -463,7 +463,17 @@ function computed_field_field_status_computed_compute(&$entity_field, $entity_ty
 		$entity_field[0]['value'] = "afgerond";
 	} else if ($wrapper->field_current_phase->value() == 'beroep') {
 		if (strlen($wrapper->field_appeal_completed->value()) > 0) {
-			$entity_field[0]['value'] = "afgerond";
+			if (strlen($wrapper->field_appeal_deadline->value()) > 0) {
+				$judgement = new DateObject($wrapper->field_appeal_deadline->value(), NULL, 'U');
+				$judgement->add(new DateInterval('P42D'));
+				if ($judgement > $today) {
+					$entity_field[0]['value'] = "afgerond";
+				} else {
+					$entity_field[0]['value'] = "open";
+				}
+			} else {
+				$entity_field[0]['value'] = "open";
+			}
 		} else {
 			$entity_field[0]['value'] = "open";
 		}
