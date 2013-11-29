@@ -68,6 +68,27 @@ function calculated_field_field_request_penalty_days_int_javascript() {
 	';
 }
 
+function calculated_field_field_penalty_days_javascript() {
+	return '
+		(function() {
+			$("#edit-field-penalty-days input").val("");
+			if ($("#edit-field-objection-notice-received input").val()) {
+				var notice_received = $("#edit-field-objection-notice-received input").datepicker("getDate");
+
+				var objection_decision = new Date();
+				if ($("#edit-field-objection-decision-date input").val()) {
+					objection_decision = $("#edit-field-objection-decision-date input").datepicker("getDate");
+				}
+
+				var days = notice_received.getDaysDifference(objection_decision);
+				if (days > 15) {
+					$("#edit-field-penalty-days input").val(Math.min(42, days - 15));
+				}
+			}
+		})();
+	';
+}
+
 function computed_field_field_request_penalty_days_calc_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
 	$entity_field[0]['value'] = 0;//NULL;
 
@@ -90,7 +111,7 @@ function computed_field_field_request_penalty_days_calc_compute(&$entity_field, 
 function calculated_field_field_request_forfeited_penalty_javascript() {
 	return '
 		var days = parseInt($("#edit-field-request-penalty-days-int input").val());
-			if (days > 0) {
+		if (days > 0) {
 			var days_term_28 = 0;
 			if (days > 28)
 				days_term_28 = days - 28;
@@ -100,6 +121,23 @@ function calculated_field_field_request_forfeited_penalty_javascript() {
 			var days_term_0 = (days - days_term_28 - days_term_14);
 			var amount = 20 * days_term_0 + 30 * days_term_14 + 40 * days_term_28;
 			$("#edit-field-request-forfeited-penalty input").val(amount);
+		}
+	';
+}
+
+function calculated_field_field_objection_forfeitedpenalty_javascript() {
+	return '
+		var days = parseInt($("#edit-field-penalty-days input").val());
+		if (days > 0) {
+			var days_term_28 = 0;
+			if (days > 28)
+				days_term_28 = days - 28;
+			var days_term_14 = 0;
+			if (days > 14)
+				days_term_14 = (days - days_term_28) - 14;
+			var days_term_0 = (days - days_term_28 - days_term_14);
+			var amount = 20 * days_term_0 + 30 * days_term_14 + 40 * days_term_28;
+			$("#edit-field-objection-forfeitedpenalty input").val(amount);
 		}
 	';
 }
