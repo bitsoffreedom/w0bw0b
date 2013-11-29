@@ -41,7 +41,7 @@ function calculated_field_field_request_addendum_days_javascript() {
 			}
 
 			if (enddate) {
-				$("#edit-field-request-addendum-days input").val(date.getDaysDifference(enddate));
+				$("#edit-field-request-addendum-days input").val(enddate.getDaysDifference(date));
 			}
 		}
 	';
