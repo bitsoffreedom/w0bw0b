@@ -743,6 +743,7 @@ function wob_field_group_build_pre_render_alter(&$element) {
 	}
 }
 
+// Select the tab of the current phase in view mode
 function wob_preprocess_horizontal_tabs(&$variables) {
 	if ($variables['element']['#id'] == 'node_wob_full_group_tabs') {
 		if (!isset($variables['element']['#default_tab_rendered'])) {
@@ -776,5 +777,32 @@ function wob_preprocess_horizontal_tabs(&$variables) {
 				$variables['element']['#children'] .= render($default_tab);
 			}
 		}
+	}
+}
+
+// Select the tab of the current phase in edit mode
+function wob_form_node_form_alter(&$form, &$form_state, $form_id) {
+	$wrapper = entity_metadata_wrapper('node', $form['#node']);
+
+	// Determine the current phase, and set the active tab accordingly
+	$selected_tab = NULL;
+	$phase = $wrapper->field_current_phase->value();
+	switch ($phase) {
+		case 'bezwaar':
+			$selected_tab = 'node_wob_form_group_objection';
+			break;
+		case 'beroep':
+			$selected_tab = 'node_wob_form_group_appeal';
+			break;
+	}
+
+	if ($selected_tab) {
+		$form['default_tab'] = array(
+			'#type' => 'hidden',
+			'#value' => $selected_tab,
+			'#attributes' => array('class' => array('horizontal-tabs-active-tab'), 'autocomplete' => 'off'),
+			'#weight' => -100,
+		);
+		$form['#group_children']['default_tab'] = 'group_tabs';
 	}
 }
