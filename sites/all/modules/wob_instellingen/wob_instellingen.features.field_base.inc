@@ -331,7 +331,7 @@ function wob_instellingen_field_default_field_bases() {
     'module' => 'number',
     'settings' => array(
       'javascript' => '',
-      'locked' => FALSE,
+      'locked' => TRUE,
     ),
     'translatable' => 0,
     'type' => 'number_integer',
@@ -1382,7 +1382,7 @@ function wob_instellingen_field_default_field_bases() {
         'year' => 'year',
       ),
       'javascript' => '',
-      'locked' => TRUE,
+      'locked' => FALSE,
       'timezone_db' => '',
       'todate' => '',
       'tz_handling' => 'none',
@@ -2544,7 +2544,7 @@ if (deadline = $(\'#edit-field-request-decision input\').datepicker().datepicker
     'module' => 'number',
     'settings' => array(
       'javascript' => '',
-      'locked' => TRUE,
+      'locked' => FALSE,
     ),
     'translatable' => 0,
     'type' => 'number_integer',
@@ -3075,7 +3075,7 @@ if (deadline = $(\'#edit-field-request-decision input\').datepicker().datepicker
     'module' => 'number',
     'settings' => array(
       'javascript' => '',
-      'locked' => FALSE,
+      'locked' => TRUE,
     ),
     'translatable' => 0,
     'type' => 'number_integer',
