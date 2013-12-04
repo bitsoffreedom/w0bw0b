@@ -257,6 +257,7 @@ function wob_instellingen_views_default_views() {
   $handler->display->display_options['filters']['field_status_computed_value']['is_grouped'] = TRUE;
   $handler->display->display_options['filters']['field_status_computed_value']['group_info']['label'] = 'Status';
   $handler->display->display_options['filters']['field_status_computed_value']['group_info']['identifier'] = 'field_status_computed_value';
+  $handler->display->display_options['filters']['field_status_computed_value']['group_info']['default_group'] = '1';
   $handler->display->display_options['filters']['field_status_computed_value']['group_info']['group_items'] = array(
     1 => array(
       'title' => 'Open',
