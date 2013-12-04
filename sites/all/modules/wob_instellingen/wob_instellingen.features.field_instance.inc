@@ -5308,7 +5308,7 @@ function wob_instellingen_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_susp_third_party_deadline',
-    'label' => 'Deadline mening derde partij',
+    'label' => 'Deadline zienswijze',
     'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
@@ -5361,7 +5361,7 @@ function wob_instellingen_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_susp_third_party_received',
-    'label' => 'Ontvangstdatum',
+    'label' => 'Ontvangstdatum zienswijze',
     'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
@@ -5414,7 +5414,7 @@ function wob_instellingen_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_susp_third_party_sent',
-    'label' => 'Verzenddatum mening derde partij',
+    'label' => 'Verzenddatum verzoek zienswijze',
     'required' => 0,
     'settings' => array(
       'default_value' => 'blank',
@@ -5591,8 +5591,8 @@ function wob_instellingen_field_default_field_instances() {
   t('Deadline aantekenen bezwaar');
   t('Deadline aanvulling');
   t('Deadline beroepschrift');
-  t('Deadline mening derde partij');
   t('Deadline voor beslissing');
+  t('Deadline zienswijze');
   t('Description');
   t('Duur alle fasen');
   t('Duur fase beroep');
@@ -5623,6 +5623,7 @@ function wob_instellingen_field_default_field_instances() {
   t('Ontvangstdatum verdaging');
   t('Ontvangstdatum verzoek');
   t('Ontvangstdatum verzoek aanvulling');
+  t('Ontvangstdatum zienswijze');
   t('Opschorting beslissing');
   t('Organisatie');
   t('Rechtbank');
@@ -5640,9 +5641,9 @@ function wob_instellingen_field_default_field_instances() {
   t('Verzenddatum beroepschrift');
   t('Verzenddatum beslissing');
   t('Verzenddatum bezwaarschrift');
-  t('Verzenddatum mening derde partij');
   t('Verzenddatum verdaging');
   t('Verzenddatum verzoek');
+  t('Verzenddatum verzoek zienswijze');
   t('Verzoek aanvulling');
   t('Voor de toepassing van wettelijke voorschriften over bezwaar en beroep worden met een besluit gelijkgesteld de schriftelijke weigering een besluit te nemen, en het niet tijdig nemen van een besluit. [<a href="http://wetten.overheid.nl/BWBR0005537/Hoofdstuk6/Afdeling61/Artikel62/">artikel 6:2 Awb</a>]');
   t('Wetsvorm');

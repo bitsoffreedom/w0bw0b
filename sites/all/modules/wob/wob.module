@@ -702,32 +702,32 @@ function wob_field_group_build_pre_render_alter(&$element) {
 		);
 	}
 
-	if (isset($element['group_right']['group_tabs']['group_objection']['group_objection_addendum'])) {
-		$element['group_right']['group_tabs']['group_objection']['group_objection_addendum']['#states'] = array(
+	if (isset($element['group_right']['group_tabs']['group_objection']['group_objection_wrapper']['group_objection_addendum'])) {
+		$element['group_right']['group_tabs']['group_objection']['group_objection_wrapper']['group_objection_addendum']['#states'] = array(
 			'visible' => array(
 				'#edit-field-objection-addendum input' => array('checked' => TRUE),
 			),
 		);
 	}
 
-	if (isset($element['group_right']['group_tabs']['group_objection']['group_objection_adjourned'])) {
-		$element['group_right']['group_tabs']['group_objection']['group_objection_adjourned']['#states'] = array(
+	if (isset($element['group_right']['group_tabs']['group_objection']['group_objection_wrapper']['group_objection_adjourned'])) {
+		$element['group_right']['group_tabs']['group_objection']['group_objection_wrapper']['group_objection_adjourned']['#states'] = array(
 			'visible' => array(
 				'#edit-field-objection-adjourned input' => array('checked' => TRUE),
 			),
 		);
 	}
 
-	if (isset($element['group_right']['group_tabs']['group_objection']['group_objection_notice'])) {
-		$element['group_right']['group_tabs']['group_objection']['group_objection_notice']['#states'] = array(
+	if (isset($element['group_right']['group_tabs']['group_objection']['group_objection_wrapper']['group_objection_notice'])) {
+		$element['group_right']['group_tabs']['group_objection']['group_objection_wrapper']['group_objection_notice']['#states'] = array(
 			'visible' => array(
 				'#edit-field-objection-notice-default input' => array('checked' => TRUE),
 			),
 		);
 	}
 
-	if (isset($element['group_right']['group_tabs']['group_objection']['group_objection_appeal'])) {
-		$element['group_right']['group_tabs']['group_objection']['group_objection_appeal']['#states'] = array(
+	if (isset($element['group_right']['group_tabs']['group_objection']['group_objection_wrapper']['group_objection_appeal'])) {
+		$element['group_right']['group_tabs']['group_objection']['group_objection_wrapper']['group_objection_appeal']['#states'] = array(
 			'visible' => array(
 				'#edit-field-objection-appeal input' => array('checked' => TRUE),
 			),
