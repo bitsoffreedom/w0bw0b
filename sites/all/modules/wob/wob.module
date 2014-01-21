@@ -464,7 +464,8 @@ function computed_field_field_status_computed_compute(&$entity_field, $entity_ty
 
 	$today = new DateObject();
 
-	if (strlen($wrapper->field_ending_reason->value()) > 0) {
+	$reason = $wrapper->field_ending_reason->value(); 
+	if (is_array($reason) && strlen($reason['value']) > 0) {
 		$entity_field[0]['value'] = "afgerond";
 	} else if ($wrapper->field_current_phase->value() == 'beroep') {
 		if (strlen($wrapper->field_appeal_completed->value()) > 0) {
